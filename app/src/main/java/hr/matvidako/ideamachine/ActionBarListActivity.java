@@ -2,6 +2,7 @@ package hr.matvidako.ideamachine;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.widget.BaseAdapter;
 import android.widget.HeaderViewListAdapter;
@@ -16,6 +17,7 @@ public abstract class ActionBarListActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
+        setupToolbar();
     }
 
     abstract protected int getLayoutId();
@@ -38,6 +40,11 @@ public abstract class ActionBarListActivity extends ActionBarActivity {
         } else {
             return adapter;
         }
+    }
+
+    private void setupToolbar() {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
     }
 
 }

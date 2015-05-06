@@ -27,13 +27,13 @@ public class ExerciseListActivity extends ActionBarListActivity implements Adapt
         ideaCountStorage = new IdeaCountStorage(this);
         List<Integer> ideaCounts = ideaCountStorage.loadIdeaCounts();
         exerciseAdapter = new ExerciseAdapter(this, exercises, ideaCounts);
-        getListView().setAdapter(exerciseAdapter);
+        setListAdapter(exerciseAdapter);
         getListView().setOnItemClickListener(this);
     }
 
     @Override
     protected int getLayoutId() {
-        return android.R.layout.list_content;
+        return R.layout.activity_exercise_list;
     }
 
     @Override
