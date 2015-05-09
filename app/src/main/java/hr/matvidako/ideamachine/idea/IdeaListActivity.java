@@ -1,42 +1,30 @@
 package hr.matvidako.ideamachine.idea;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.PopupMenu;
-import android.widget.TextView;
 import android.widget.Toast;
-
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.melnykov.fab.FloatingActionButton;
-
-import java.util.List;
-
 import hr.matvidako.ideamachine.ActionBarListActivity;
 import hr.matvidako.ideamachine.R;
-import hr.matvidako.ideamachine.exercise.Exercise;
+import hr.matvidako.ideamachine.idea.storage.DummyIdeaStorage;
 import hr.matvidako.ideamachine.idea.storage.IdeaStorage;
-import hr.matvidako.ideamachine.idea.storage.PrefsIdeaStorage;
 
 public class IdeaListActivity extends ActionBarListActivity implements View.OnClickListener, AdapterView.OnItemClickListener, PopupMenu.OnMenuItemClickListener {
 
-    private Exercise exercise;
     private IdeaAdapter ideaAdapter;
+    private IdeaStorage ideaStorage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        exercise = IntentBuilder.load(getIntent());
-        setTitle(exercise.title);
         setupFab();
-        setupListHeader();
         setupAdapter();
         getListView().setOnItemClickListener(this);
     }
@@ -44,14 +32,11 @@ public class IdeaListActivity extends ActionBarListActivity implements View.OnCl
     @Override
     protected void onPause() {
         super.onPause();
-        List<Idea> ideas = ideaAdapter.getItems();
-        IdeaStorage ideaStorage = new PrefsIdeaStorage(this);
-        ideaStorage.storeIdeas(exercise.id, ideas);
     }
 
     private void setupAdapter() {
-        IdeaStorage ideaStorage = new PrefsIdeaStorage(this);
-        ideaAdapter = new IdeaAdapter(this, ideaStorage.loadIdeas(exercise.id));
+        ideaStorage = new DummyIdeaStorage();
+        ideaAdapter = new IdeaAdapter(this, ideaStorage.loadAll());
         setListAdapter(ideaAdapter);
     }
 
@@ -59,12 +44,6 @@ public class IdeaListActivity extends ActionBarListActivity implements View.OnCl
         FloatingActionButton floatingActionButton = (FloatingActionButton) findViewById(R.id.fab_add_idea);
         floatingActionButton.attachToListView(getListView());
         floatingActionButton.setOnClickListener(this);
-    }
-
-    private void setupListHeader() {
-        TextView headerDescription = (TextView) getLayoutInflater().inflate(R.layout.header_exercise_description, null, false);
-        headerDescription.setText(exercise.description);
-        getListView().addHeaderView(headerDescription, null, false);
     }
 
     @Override
@@ -142,20 +121,6 @@ public class IdeaListActivity extends ActionBarListActivity implements View.OnCl
             Toast.makeText(this, "Delete", Toast.LENGTH_SHORT).show();
         }
         return true;
-    }
-
-    public static class IntentBuilder {
-        private static final String EXTRA_EXERCISE = "EXTRA_EXERCISE";
-
-        public static Intent build(Activity activity, Exercise exercise) {
-            Intent intent = new Intent(activity, IdeaListActivity.class);
-            intent.putExtra(EXTRA_EXERCISE, exercise);
-            return intent;
-        }
-        public static Exercise load(Intent intent) {
-            Exercise exercise = (Exercise) intent.getSerializableExtra(EXTRA_EXERCISE);
-            return exercise;
-        }
     }
 
 }

@@ -8,11 +8,8 @@ import hr.matvidako.ideamachine.idea.Idea;
 public class DummyIdeaStorage implements IdeaStorage {
 
     @Override
-    public List<Idea> loadIdeas(int exerciseId) {
+    public List<Idea> loadAll() {
         List<Idea> ideas = new ArrayList<>();
-        if(exerciseId == 1) {
-            return ideas;
-        }
         ideas.add(new Idea(1, "Gladiola app"));
         ideas.add(new Idea(2, "Weddings"));
         ideas.add(new Idea(3, "Completed games"));
@@ -27,7 +24,11 @@ public class DummyIdeaStorage implements IdeaStorage {
     }
 
     @Override
-    public void storeIdeas(int exerciseId, List<Idea> ideas) {
+    public void store(List<Idea> ideas) {
+    }
+
+    @Override
+    public void store(Idea idea) {
     }
 
 }

@@ -6,8 +6,10 @@ import hr.matvidako.ideamachine.idea.Idea;
 
 public interface IdeaStorage {
 
-    List<Idea> loadIdeas(int exerciseId);
+    List<Idea> loadAll();
 
-    void storeIdeas(int exerciseId, List<Idea> ideas);
+    void store(List<Idea> ideas);
+
+    void store(Idea idea);
 
 }
