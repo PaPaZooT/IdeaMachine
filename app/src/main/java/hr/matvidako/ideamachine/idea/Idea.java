@@ -1,15 +1,23 @@
 package hr.matvidako.ideamachine.idea;
 
-import java.io.Serializable;
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
 
-public class Idea implements Serializable {
+import hr.matvidako.ideamachine.db.Data;
 
-    public final int id;
-    public final String content;
+@DatabaseTable
+public class Idea extends Data {
 
-    public Idea(int id, String content) {
-        this.id = id;
+    @DatabaseField
+    private String content;
+
+    public Idea() {}
+
+    public Idea(String content) {
         this.content = content;
     }
 
+    public String getContent() {
+        return content;
+    }
 }

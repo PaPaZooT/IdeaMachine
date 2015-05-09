@@ -13,13 +13,14 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.melnykov.fab.FloatingActionButton;
 import hr.matvidako.ideamachine.ActionBarListActivity;
 import hr.matvidako.ideamachine.R;
+import hr.matvidako.ideamachine.idea.storage.DatabaseIdeaStorage;
 import hr.matvidako.ideamachine.idea.storage.DummyIdeaStorage;
 import hr.matvidako.ideamachine.idea.storage.IdeaStorage;
 
 public class IdeaListActivity extends ActionBarListActivity implements View.OnClickListener, AdapterView.OnItemClickListener, PopupMenu.OnMenuItemClickListener {
 
     private IdeaAdapter ideaAdapter;
-    private IdeaStorage ideaStorage;
+    private int selectedPosition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,8 +36,8 @@ public class IdeaListActivity extends ActionBarListActivity implements View.OnCl
     }
 
     private void setupAdapter() {
-        ideaStorage = new DummyIdeaStorage();
-        ideaAdapter = new IdeaAdapter(this, ideaStorage.loadAll());
+        IdeaStorage ideaStorage = new DatabaseIdeaStorage(this);
+        ideaAdapter = new IdeaAdapter(this, ideaStorage);
         setListAdapter(ideaAdapter);
     }
 
@@ -74,13 +75,15 @@ public class IdeaListActivity extends ActionBarListActivity implements View.OnCl
                 .callback(new MaterialDialog.ButtonCallback() {
                     @Override
                     public void onPositive(MaterialDialog dialog) {
-                        ideaAdapter.addIdea(etNewIdea.getText().toString());
+                        Idea idea = new Idea(etNewIdea.getText().toString());
+                        ideaAdapter.addIdea(idea);
                         dialog.dismiss();
                     }
 
                     @Override
                     public void onNegative(MaterialDialog dialog) {
-                        ideaAdapter.addIdea(etNewIdea.getText().toString());
+                        Idea idea = new Idea(etNewIdea.getText().toString());
+                        ideaAdapter.addIdea(idea);
                         etNewIdea.setText("");
                         etNewIdea.requestFocus();
                     }
@@ -110,15 +113,14 @@ public class IdeaListActivity extends ActionBarListActivity implements View.OnCl
         popupMenu.setOnMenuItemClickListener(this);
         popupMenu.inflate(R.menu.menu_idea);
         popupMenu.show();
+        selectedPosition = position;
     }
 
     @Override
     public boolean onMenuItemClick(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.action_edit) {
-            Toast.makeText(this, "Edit", Toast.LENGTH_SHORT).show();
-        } else if (id == R.id.action_delete) {
-            Toast.makeText(this, "Delete", Toast.LENGTH_SHORT).show();
+        if (id == R.id.action_delete) {
+            ideaAdapter.deleteIdea(ideaAdapter.getItem(selectedPosition));
         }
         return true;
     }

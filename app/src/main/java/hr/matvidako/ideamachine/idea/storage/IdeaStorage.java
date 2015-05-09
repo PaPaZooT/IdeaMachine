@@ -8,8 +8,7 @@ public interface IdeaStorage {
 
     List<Idea> loadAll();
 
-    void store(List<Idea> ideas);
-
     void store(Idea idea);
 
+    void remove(Idea idea);
 }

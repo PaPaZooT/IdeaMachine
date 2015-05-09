@@ -11,17 +11,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hr.matvidako.ideamachine.R;
+import hr.matvidako.ideamachine.idea.storage.IdeaStorage;
 
 public class IdeaAdapter extends BaseAdapter {
 
     private List<Idea> ideas = new ArrayList<>();
     private LayoutInflater layoutInflater;
     private Context context;
+    private IdeaStorage ideaStorage;
 
-    public IdeaAdapter(Context context, List<Idea> ideas) {
+    public IdeaAdapter(Context context, IdeaStorage ideaStorage) {
         this.context = context;
+        this.ideaStorage = ideaStorage;
         layoutInflater = LayoutInflater.from(context);
-        this.ideas.addAll(ideas);
+        this.ideas.addAll(ideaStorage.loadAll());
     }
 
     @Override
@@ -36,7 +39,7 @@ public class IdeaAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        return getItem(position).id;
+        return getItem(position).getId();
     }
 
     @Override
@@ -45,18 +48,19 @@ public class IdeaAdapter extends BaseAdapter {
             convertView = layoutInflater.inflate(R.layout.list_item_idea, null, false);
         }
         TextView title = (TextView) convertView.findViewById(R.id.idea_title);
-        title.setText(getItem(position).content);
+        title.setText(getItem(position).getContent());
         return convertView;
     }
 
-    public List<Idea> getItems() {
-        return ideas;
-    }
-
-    public void addIdea(String content) {
-        int ideaCount = getCount();
-        ideas.add(new Idea(ideaCount + 1, content));
+    public void addIdea(Idea idea) {
+        ideaStorage.store(idea);
+        ideas.add(idea);
         notifyDataSetChanged();
     }
 
+    public void deleteIdea(Idea idea) {
+        ideaStorage.remove(idea);
+        ideas.remove(idea);
+        notifyDataSetChanged();
+    }
 }

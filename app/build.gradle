@@ -29,4 +29,5 @@ dependencies {
     compile 'com.melnykov:floatingactionbutton:1.2.0'
     compile 'com.google.code.gson:gson:2.2.+'
     compile 'com.afollestad:material-dialogs:0.6.6.3'
+    compile 'com.j256.ormlite:ormlite-android:4.48'
 }
