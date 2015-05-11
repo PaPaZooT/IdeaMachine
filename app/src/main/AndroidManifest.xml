@@ -9,10 +9,10 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/IdeaTheme" >
         <activity
             android:name=".idea.IdeaListActivity"
-            android:label="@string/app_name" >
+            android:label="@string/ideas" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

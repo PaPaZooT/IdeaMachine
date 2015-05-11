@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ListView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/menu_list"
+    android:layout_width="@dimen/menu_drawer_width"
+    android:layout_height="match_parent"
+    android:layout_gravity="left|start"
+    android:layout_marginTop="-25dp"
+    android:background="@color/background_light"
+    android:fitsSystemWindows="true" />

@@ -10,9 +10,12 @@
     <color name="text_dark">#212121</color>
     <color name="text_gray">#727272</color>
     <color name="text_white">#FFFFFF</color>
+    <color name="text_menu_drawer">#000000</color>
 
     <color name="divider">#B6B6B6</color>
     <color name="ripple">#B6B6B6</color>
     <color name="transparent">#00FFFFFF</color>
+
+    <color name="background_light">#FAFAFA</color>
 
 </resources>
