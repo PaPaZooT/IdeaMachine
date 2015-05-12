@@ -2,6 +2,8 @@ package hr.matvidako.ideamachine.idea.storage;
 
 import android.content.Context;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import hr.matvidako.ideamachine.db.Repository;
@@ -15,7 +17,7 @@ public class DatabaseIdeaStorage extends Repository<Idea> implements IdeaStorage
 
     @Override
     public List<Idea> loadAll() {
-        return getAll();
+        return getAllSortedByDateCreatedDesc();
     }
 
     @Override
@@ -26,6 +28,15 @@ public class DatabaseIdeaStorage extends Repository<Idea> implements IdeaStorage
     @Override
     public void remove(Idea idea) {
         delete(idea);
+    }
+
+    private List<Idea> getAllSortedByDateCreatedDesc() {
+        try {
+            return dao.queryBuilder().orderBy(Idea.Columns.dateCreated, false).query();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
     }
 
 }

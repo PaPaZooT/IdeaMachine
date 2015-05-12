@@ -10,7 +10,7 @@ import java.util.List;
 public class Repository<T extends Data> {
 
 	private DBHelper db;
-	Dao<T, Integer> dao;
+	protected Dao<T, Integer> dao;
 
 	public Repository(Context ctx, Class<T> typeParameterClass) {
 		try {
