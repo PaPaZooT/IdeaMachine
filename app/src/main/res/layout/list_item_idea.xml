@@ -12,6 +12,8 @@
         android:layout_weight="1"
         android:layout_height="wrap_content"
         android:textColor="@color/text_dark"
+        android:singleLine="true"
+        android:maxLines="1"
         android:textSize="@dimen/text_list_title" />
 
 </LinearLayout>
