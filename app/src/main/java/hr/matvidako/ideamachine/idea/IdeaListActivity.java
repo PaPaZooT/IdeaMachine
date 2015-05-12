@@ -2,13 +2,18 @@ package hr.matvidako.ideamachine.idea;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.PopupMenu;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.melnykov.fab.FloatingActionButton;
@@ -58,55 +63,8 @@ public class IdeaListActivity extends BaseActivity implements View.OnClickListen
     public void onClick(View v) {
         int id = v.getId();
         if(id == R.id.fab_add_idea) {
-            showCreateNewIdeaDialog();
+            showAddNewIdeaDialog();
         }
-    }
-
-    private void showCreateNewIdeaDialog() {
-        View dialogContent = getLayoutInflater().inflate(R.layout.dialog_new_idea, null, false);
-        final EditText etNewIdea = (EditText) dialogContent.findViewById(R.id.new_idea);
-        showKeyboard(etNewIdea);
-
-        new MaterialDialog.Builder(this)
-                .title(R.string.title_add_idea)
-                .customView(dialogContent, false)
-                .positiveText(R.string.add)
-                .negativeText(R.string.add_and_next)
-                .neutralText(R.string.cancel)
-                .autoDismiss(false)
-                .callback(new MaterialDialog.ButtonCallback() {
-                    @Override
-                    public void onPositive(MaterialDialog dialog) {
-                        Idea idea = new Idea(etNewIdea.getText().toString());
-                        ideaAdapter.addIdea(idea);
-                        dialog.dismiss();
-                    }
-
-                    @Override
-                    public void onNegative(MaterialDialog dialog) {
-                        Idea idea = new Idea(etNewIdea.getText().toString());
-                        ideaAdapter.addIdea(idea);
-                        etNewIdea.setText("");
-                        etNewIdea.requestFocus();
-                    }
-
-                    @Override
-                    public void onNeutral(MaterialDialog dialog) {
-                        dialog.dismiss();
-                    }
-                })
-                .show();
-    }
-
-    private void showKeyboard(final View viewInFocus) {
-        viewInFocus.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                InputMethodManager mgr = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                viewInFocus.requestFocus();
-                mgr.showSoftInput(viewInFocus, InputMethodManager.SHOW_IMPLICIT);
-            }
-        }, 100);
     }
 
     @Override
@@ -125,6 +83,76 @@ public class IdeaListActivity extends BaseActivity implements View.OnClickListen
             ideaAdapter.deleteIdea(ideaAdapter.getItem(selectedPosition));
         }
         return true;
+    }
+
+    private void showAddNewIdeaDialog() {
+        View dialogContentView = getLayoutInflater().inflate(R.layout.dialog_new_idea, null, false);
+        final EditText etNewIdea = (EditText) dialogContentView.findViewById(R.id.new_idea);
+
+        final MaterialDialog dialog = createAddNewIdeaDialog(etNewIdea, dialogContentView);
+        dialog.show();
+
+        showKeyboard(etNewIdea);
+        etNewIdea.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    Idea idea = new Idea(etNewIdea.getText().toString());
+                    ideaAdapter.addIdea(idea);
+                    dialog.dismiss();
+                    return true;
+                }
+                return false;
+            }
+        });
+    }
+
+    private MaterialDialog createAddNewIdeaDialog(final EditText etNewIdea, View dialogContentView) {
+        return new MaterialDialog.Builder(this)
+                .title(R.string.title_add_idea)
+                .customView(dialogContentView, false)
+                .positiveText(R.string.add)
+                .negativeText(R.string.add_and_next)
+                .neutralText(R.string.cancel)
+                .autoDismiss(false)
+                .callback(new MaterialDialog.ButtonCallback() {
+                    @Override
+                    public void onPositive(MaterialDialog dialog) {
+                        addNewIdea(etNewIdea.getText().toString());
+                        dialog.dismiss();
+                    }
+
+                    @Override
+                    public void onNegative(MaterialDialog dialog) {
+                        addNewIdea(etNewIdea.getText().toString());
+                        etNewIdea.setText("");
+                        etNewIdea.requestFocus();
+                    }
+
+                    @Override
+                    public void onNeutral(MaterialDialog dialog) {
+                        dialog.dismiss();
+                    }
+                }).build();
+    }
+
+    private void addNewIdea(String text) {
+        Toast toast = Toast.makeText(this, R.string.new_idea_added, Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.show();
+        Idea idea = new Idea(text);
+        ideaAdapter.addIdea(idea);
+    }
+
+    private void showKeyboard(final View viewInFocus) {
+        viewInFocus.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                InputMethodManager mgr = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                viewInFocus.requestFocus();
+                mgr.showSoftInput(viewInFocus, InputMethodManager.SHOW_IMPLICIT);
+            }
+        }, 100);
     }
 
 }

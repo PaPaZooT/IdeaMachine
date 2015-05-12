@@ -17,11 +17,9 @@ public class IdeaAdapter extends BaseAdapter {
 
     private List<Idea> ideas = new ArrayList<>();
     private LayoutInflater layoutInflater;
-    private Context context;
     private IdeaStorage ideaStorage;
 
     public IdeaAdapter(Context context, IdeaStorage ideaStorage) {
-        this.context = context;
         this.ideaStorage = ideaStorage;
         layoutInflater = LayoutInflater.from(context);
         this.ideas.addAll(ideaStorage.loadAll());
@@ -54,7 +52,7 @@ public class IdeaAdapter extends BaseAdapter {
 
     public void addIdea(Idea idea) {
         ideaStorage.store(idea);
-        ideas.add(idea);
+        ideas.add(0, idea);
         notifyDataSetChanged();
     }
 
