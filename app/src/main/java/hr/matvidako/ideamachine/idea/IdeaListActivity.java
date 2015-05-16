@@ -17,6 +17,9 @@ import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.melnykov.fab.FloatingActionButton;
+
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 import hr.matvidako.ideamachine.BaseActivity;
 import hr.matvidako.ideamachine.R;
 import hr.matvidako.ideamachine.idea.storage.DatabaseIdeaStorage;
@@ -24,13 +27,15 @@ import hr.matvidako.ideamachine.idea.storage.IdeaStorage;
 
 public class IdeaListActivity extends BaseActivity implements View.OnClickListener, AdapterView.OnItemClickListener, PopupMenu.OnMenuItemClickListener {
 
-    private ListView listView;
+    @InjectView(android.R.id.list)
+    ListView listView;
     private IdeaAdapter ideaAdapter;
     private int selectedPosition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ButterKnife.inject(this);
         setupListView();
         setupFab();
         getSupportActionBar().setTitle(getString(R.string.ideas));
@@ -42,7 +47,6 @@ public class IdeaListActivity extends BaseActivity implements View.OnClickListen
     }
 
     private void setupListView() {
-        listView = (ListView) findViewById(android.R.id.list);
         listView.setOnItemClickListener(this);
         IdeaStorage ideaStorage = new DatabaseIdeaStorage(this);
         ideaAdapter = new IdeaAdapter(this, ideaStorage);

@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import butterknife.ButterKnife;
 import hr.matvidako.ideamachine.R;
 
 public class DrawerItemAdapter extends BaseAdapter {
@@ -41,7 +42,7 @@ public class DrawerItemAdapter extends BaseAdapter {
         if (convertView == null) {
             convertView = inflater.inflate(R.layout.list_item_drawer, null);
         }
-        TextView title = (TextView) convertView.findViewById(R.id.title);
+        TextView title = ButterKnife.findById(convertView, R.id.title);
         title.setText(context.getString(currentItem.title));
         if(currentItem.drawable != 0) {
             title.setCompoundDrawablesWithIntrinsicBounds(currentItem.drawable, 0, 0, 0);

@@ -10,6 +10,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 import hr.matvidako.ideamachine.R;
 import hr.matvidako.ideamachine.idea.storage.IdeaStorage;
 
@@ -42,11 +44,15 @@ public class IdeaAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        ViewHolder viewHolder;
         if(convertView == null) {
             convertView = layoutInflater.inflate(R.layout.list_item_idea, null, false);
+            viewHolder = new ViewHolder(convertView);
+            convertView.setTag(viewHolder);
+        } else {
+            viewHolder = (ViewHolder) convertView.getTag();
         }
-        TextView title = (TextView) convertView.findViewById(R.id.idea_title);
-        title.setText(getItem(position).getContent());
+        viewHolder.title.setText(getItem(position).getContent());
         return convertView;
     }
 
@@ -61,4 +67,13 @@ public class IdeaAdapter extends BaseAdapter {
         ideas.remove(idea);
         notifyDataSetChanged();
     }
+
+    static class ViewHolder {
+        @InjectView(R.id.idea_title) TextView title;
+
+        public ViewHolder(View view) {
+            ButterKnife.inject(this, view);
+        }
+    }
+
 }

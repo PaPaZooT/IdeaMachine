@@ -6,7 +6,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -55,7 +54,7 @@ public abstract class BaseActivity extends ActionBarActivity implements AdapterV
 
         View header = getLayoutInflater().inflate(R.layout.header_menu, null, false);
         menuList.addHeaderView(header, null, false);
-        tvIdeaCount = (TextView) header.findViewById(R.id.idea_count);
+        tvIdeaCount = ButterKnife.findById(header, R.id.idea_count);
 
         drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, 0, 0) {
             @Override
