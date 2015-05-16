@@ -8,4 +8,12 @@ public class DateUtils {
         return  new DateTime().withTime(0, 0, 0, 0).getMillis();
     }
 
+    public static long getStartOfYesterdayMilis() {
+        return  getStartOfToday().minusDays(1).getMillis();
+    }
+
+    private static DateTime getStartOfToday() {
+        return  new DateTime().withTime(0, 0, 0, 0);
+    }
+
 }

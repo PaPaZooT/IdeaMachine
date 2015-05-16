@@ -1,6 +1,7 @@
 package hr.matvidako.ideamachine;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import hr.matvidako.ideamachine.drawer.DrawerItemAdapter;
+import hr.matvidako.ideamachine.idea.storage.IdeaStorage;
 
 public abstract class BaseActivity extends ActionBarActivity implements AdapterView.OnItemClickListener {
 
@@ -24,16 +26,16 @@ public abstract class BaseActivity extends ActionBarActivity implements AdapterV
     ListView menuList;
     @InjectView(R.id.menu_drawer)
     DrawerLayout drawerLayout;
-    TextView tvIdeaCount;
 
-    ActionBarDrawerToggle drawerToggle;
     DrawerItemAdapter menuAdapter;
+    Resources resources;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
         ButterKnife.inject(this);
+        resources = getResources();
         setupToolbar();
         setupMenuDrawer();
     }
@@ -50,13 +52,17 @@ public abstract class BaseActivity extends ActionBarActivity implements AdapterV
 
         View header = getLayoutInflater().inflate(R.layout.header_menu, null, false);
         menuList.addHeaderView(header, null, false);
-        tvIdeaCount = ButterKnife.findById(header, R.id.idea_count);
+        final TextView tvIdeaCount = ButterKnife.findById(header, R.id.idea_count);
+        final TextView tvIdeaStreak = ButterKnife.findById(header, R.id.idea_streak);
 
-        drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, 0, 0) {
+        ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, 0, 0) {
             @Override
             public void onDrawerOpened(View drawerView) {
-                long ideaCount = IdeaApplication.getInstance().getIdeaStorage().getIdeaCountForToday();
-                tvIdeaCount.setText(getString(R.string.ideas_today, ideaCount));
+                IdeaStorage ideaStorage = IdeaApplication.getInstance().getIdeaStorage();
+                int ideasToday = ideaStorage.getIdeaCountForToday();
+                tvIdeaCount.setText(resources.getQuantityString(R.plurals.ideas_today, ideasToday, ideasToday));
+                int streak = ideaStorage.getCurrentIdeaStreak();
+                tvIdeaStreak.setText(resources.getQuantityString(R.plurals.streak, streak, streak));
                 super.onDrawerOpened(drawerView);
             }
         };

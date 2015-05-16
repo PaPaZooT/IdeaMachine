@@ -1,14 +1,11 @@
 package hr.matvidako.ideamachine;
 
 import android.app.Application;
-
 import net.danlew.android.joda.JodaTimeAndroid;
-
 import hr.matvidako.ideamachine.idea.storage.DatabaseIdeaStorage;
 import hr.matvidako.ideamachine.idea.storage.IdeaStorage;
 
 public class IdeaApplication extends Application {
-
 
     private static IdeaApplication instance;
     private IdeaStorage ideaStorage;
@@ -19,6 +16,7 @@ public class IdeaApplication extends Application {
         JodaTimeAndroid.init(this);
         instance = this;
         ideaStorage = new DatabaseIdeaStorage(this);
+        ideaStorage.updateCurrentIdeaStreak();
     }
 
     public static IdeaApplication getInstance() {

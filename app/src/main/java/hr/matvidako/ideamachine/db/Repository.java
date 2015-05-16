@@ -11,8 +11,10 @@ public class Repository<T extends Data> {
 
 	private DBHelper db;
 	protected Dao<T, Integer> dao;
+	protected Context context;
 
 	public Repository(Context ctx, Class<T> typeParameterClass) {
+		this.context = ctx;
 		try {
 			db = DBHelper.getInstance(ctx);
 			dao = db.getDao(typeParameterClass);

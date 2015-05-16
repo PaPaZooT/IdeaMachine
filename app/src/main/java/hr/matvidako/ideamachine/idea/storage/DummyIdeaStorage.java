@@ -40,8 +40,17 @@ public class DummyIdeaStorage implements IdeaStorage {
     }
 
     @Override
-    public long getIdeaCountForToday() {
+    public int getIdeaCountForToday() {
         return random.nextInt(11);
+    }
+
+    @Override
+    public int getCurrentIdeaStreak() {
+        return random.nextInt(150);
+    }
+
+    @Override
+    public void updateCurrentIdeaStreak() {
     }
 
 }

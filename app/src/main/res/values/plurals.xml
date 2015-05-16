@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="ideas_today">
+        <item quantity="one">1 idea today</item>
+        <item quantity="other">%d ideas today</item>
+    </plurals>
+
+    <plurals name="streak">
+        <item quantity="one">1 day streak</item>
+        <item quantity="other">%d days streak</item>
+    </plurals>
+</resources>

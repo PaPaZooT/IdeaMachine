@@ -1,6 +1,7 @@
 <resources>
     <dimen name="padding_small">8dp</dimen>
     <dimen name="padding_normal">16dp</dimen>
+    <dimen name="padding_large">24dp</dimen>
 
     <dimen name="text_list_title">16sp</dimen>
     <dimen name="text_body">14sp</dimen>
