@@ -6,12 +6,15 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import hr.matvidako.ideamachine.drawer.DrawerItemAdapter;
+import hr.matvidako.ideamachine.idea.storage.DatabaseIdeaStorage;
+import hr.matvidako.ideamachine.idea.storage.IdeaStorage;
 
 public abstract class BaseActivity extends ActionBarActivity implements AdapterView.OnItemClickListener {
 
@@ -46,6 +49,9 @@ public abstract class BaseActivity extends ActionBarActivity implements AdapterV
         menuAdapter = new DrawerItemAdapter(this);
         menuList.setAdapter(menuAdapter);
         menuList.setOnItemClickListener(new DrawerItemClickListener());
+
+        long ideasToday = new DatabaseIdeaStorage(this).getIdeaCountForToday();
+        Log.d("DISI", "ideas today " + ideasToday);
     }
 
     abstract protected int getLayoutId();

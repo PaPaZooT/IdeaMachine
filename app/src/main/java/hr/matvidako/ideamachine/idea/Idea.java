@@ -2,9 +2,7 @@ package hr.matvidako.ideamachine.idea;
 
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
-
-import java.util.Date;
-
+import org.joda.time.DateTime;
 import hr.matvidako.ideamachine.db.Data;
 
 @DatabaseTable
@@ -14,17 +12,17 @@ public class Idea extends Data {
     private String content;
 
     @DatabaseField(columnName = Columns.dateCreated)
-    private Date dateCreated;
+    private long dateCreated;
 
     @DatabaseField(columnName = Columns.dateUpdated)
-    private Date dateUpdated;
+    private long dateUpdated;
 
     public Idea() {}
 
     public Idea(String content) {
         this.content = content;
-        dateCreated = new Date();
-        dateUpdated = new Date();
+        dateCreated = new DateTime().getMillis();
+        dateUpdated = new DateTime().getMillis();
     }
 
     public String getContent() {
