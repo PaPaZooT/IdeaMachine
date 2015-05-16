@@ -11,4 +11,6 @@ public interface IdeaStorage {
     void store(Idea idea);
 
     void remove(Idea idea);
+
+    long getIdeaCountForToday();
 }

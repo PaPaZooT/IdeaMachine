@@ -41,6 +41,7 @@ public class DatabaseIdeaStorage extends Repository<Idea> implements IdeaStorage
         }
     }
 
+    @Override
     public long getIdeaCountForToday() {
         try {
             return dao.queryBuilder().where().gt(Idea.Columns.dateCreated, DateUtils.getStartOfTodayMilis()).countOf();

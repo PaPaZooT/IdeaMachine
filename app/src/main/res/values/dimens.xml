@@ -8,4 +8,5 @@
 
     <dimen name="menu_drawer_width">305dp</dimen>
     <dimen name="menu_header_image_height">200dp</dimen>
+    <dimen name="text_header">22dp</dimen>
 </resources>

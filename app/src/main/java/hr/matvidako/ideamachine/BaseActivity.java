@@ -10,48 +10,61 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 import hr.matvidako.ideamachine.drawer.DrawerItemAdapter;
 import hr.matvidako.ideamachine.idea.storage.DatabaseIdeaStorage;
 import hr.matvidako.ideamachine.idea.storage.IdeaStorage;
 
 public abstract class BaseActivity extends ActionBarActivity implements AdapterView.OnItemClickListener {
 
+    @InjectView(R.id.toolbar)
     Toolbar toolbar;
+    @InjectView(R.id.menu_list)
     ListView menuList;
-    ActionBarDrawerToggle drawerToggle;
+    @InjectView(R.id.menu_drawer)
     DrawerLayout drawerLayout;
+    TextView tvIdeaCount;
+
+    ActionBarDrawerToggle drawerToggle;
     DrawerItemAdapter menuAdapter;
+    IdeaStorage ideaStorage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
+        ButterKnife.inject(this);
+        ideaStorage = new DatabaseIdeaStorage(this);
         setupToolbar();
         setupMenuDrawer();
     }
 
     private void setupToolbar() {
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setNavigationIcon(R.drawable.menu);
         setSupportActionBar(toolbar);
     }
 
     protected void setupMenuDrawer() {
-        drawerLayout = (DrawerLayout) findViewById(R.id.menu_drawer);
-        drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.add, R.string.cancel);
-        drawerLayout.setDrawerListener(drawerToggle);
-
-        menuList = (ListView) findViewById(R.id.menu_list);
-        View header = getLayoutInflater().inflate(R.layout.header_menu, null, false);
-        menuList.addHeaderView(header, null, false);
         menuAdapter = new DrawerItemAdapter(this);
         menuList.setAdapter(menuAdapter);
         menuList.setOnItemClickListener(new DrawerItemClickListener());
 
-        long ideasToday = new DatabaseIdeaStorage(this).getIdeaCountForToday();
-        Log.d("DISI", "ideas today " + ideasToday);
+        View header = getLayoutInflater().inflate(R.layout.header_menu, null, false);
+        menuList.addHeaderView(header, null, false);
+        tvIdeaCount = (TextView) header.findViewById(R.id.idea_count);
+
+        drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, 0, 0) {
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                tvIdeaCount.setText(getString(R.string.ideas_today, ideaStorage.getIdeaCountForToday()));
+                super.onDrawerOpened(drawerView);
+            }
+        };
+        drawerLayout.setDrawerListener(drawerToggle);
     }
 
     abstract protected int getLayoutId();

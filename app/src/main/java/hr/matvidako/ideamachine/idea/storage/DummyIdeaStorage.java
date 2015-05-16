@@ -2,6 +2,7 @@ package hr.matvidako.ideamachine.idea.storage;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import hr.matvidako.ideamachine.idea.Idea;
 
@@ -21,6 +22,8 @@ public class DummyIdeaStorage implements IdeaStorage {
         ideas.add(new Idea("Steam details"));
     }
 
+    Random random = new Random();
+
     @Override
     public List<Idea> loadAll() {
         return ideas;
@@ -34,6 +37,11 @@ public class DummyIdeaStorage implements IdeaStorage {
     @Override
     public void remove(Idea idea) {
         ideas.remove(idea);
+    }
+
+    @Override
+    public long getIdeaCountForToday() {
+        return random.nextInt(11);
     }
 
 }
