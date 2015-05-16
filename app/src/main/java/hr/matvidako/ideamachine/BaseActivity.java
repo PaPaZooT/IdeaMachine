@@ -15,8 +15,6 @@ import android.widget.Toast;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import hr.matvidako.ideamachine.drawer.DrawerItemAdapter;
-import hr.matvidako.ideamachine.idea.storage.DatabaseIdeaStorage;
-import hr.matvidako.ideamachine.idea.storage.IdeaStorage;
 
 public abstract class BaseActivity extends ActionBarActivity implements AdapterView.OnItemClickListener {
 
@@ -30,14 +28,12 @@ public abstract class BaseActivity extends ActionBarActivity implements AdapterV
 
     ActionBarDrawerToggle drawerToggle;
     DrawerItemAdapter menuAdapter;
-    IdeaStorage ideaStorage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
         ButterKnife.inject(this);
-        ideaStorage = new DatabaseIdeaStorage(this);
         setupToolbar();
         setupMenuDrawer();
     }
@@ -59,7 +55,8 @@ public abstract class BaseActivity extends ActionBarActivity implements AdapterV
         drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, 0, 0) {
             @Override
             public void onDrawerOpened(View drawerView) {
-                tvIdeaCount.setText(getString(R.string.ideas_today, ideaStorage.getIdeaCountForToday()));
+                long ideaCount = IdeaApplication.getInstance().getIdeaStorage().getIdeaCountForToday();
+                tvIdeaCount.setText(getString(R.string.ideas_today, ideaCount));
                 super.onDrawerOpened(drawerView);
             }
         };

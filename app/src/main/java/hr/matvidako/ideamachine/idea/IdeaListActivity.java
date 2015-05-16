@@ -21,6 +21,7 @@ import com.melnykov.fab.FloatingActionButton;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import hr.matvidako.ideamachine.BaseActivity;
+import hr.matvidako.ideamachine.IdeaApplication;
 import hr.matvidako.ideamachine.R;
 import hr.matvidako.ideamachine.idea.storage.DatabaseIdeaStorage;
 import hr.matvidako.ideamachine.idea.storage.IdeaStorage;
@@ -48,8 +49,7 @@ public class IdeaListActivity extends BaseActivity implements View.OnClickListen
 
     private void setupListView() {
         listView.setOnItemClickListener(this);
-        IdeaStorage ideaStorage = new DatabaseIdeaStorage(this);
-        ideaAdapter = new IdeaAdapter(this, ideaStorage);
+        ideaAdapter = new IdeaAdapter(this, IdeaApplication.getInstance().getIdeaStorage());
         listView.setAdapter(ideaAdapter);
     }
 
