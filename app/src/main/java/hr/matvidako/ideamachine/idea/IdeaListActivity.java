@@ -33,6 +33,7 @@ public class IdeaListActivity extends BaseActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         setupListView();
         setupFab();
+        getSupportActionBar().setTitle(getString(R.string.ideas));
     }
 
     @Override
