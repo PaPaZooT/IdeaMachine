@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import hr.matvidako.ideamachine.db.Data;
 import hr.matvidako.ideamachine.db.Repository;
 import hr.matvidako.ideamachine.idea.Idea;
 import hr.matvidako.ideamachine.utils.DateUtils;
@@ -52,7 +53,7 @@ public class DatabaseIdeaStorage extends Repository<Idea> implements IdeaStorage
 
     private List<Idea> getAllSortedByDateCreatedDesc() {
         try {
-            return dao.queryBuilder().orderBy(Idea.Columns.dateCreated, false).query();
+            return dao.queryBuilder().orderBy(Data.Columns.dateCreated, false).query();
         } catch (SQLException e) {
             e.printStackTrace();
             return new ArrayList<>();
@@ -66,7 +67,7 @@ public class DatabaseIdeaStorage extends Repository<Idea> implements IdeaStorage
 
     private int getIdeaCountForDay(long dayStartMilis) {
         try {
-            return (int) dao.queryBuilder().where().between(Idea.Columns.dateCreated, dayStartMilis, dayStartMilis + DateTimeConstants.MILLIS_PER_DAY).countOf();
+            return (int) dao.queryBuilder().where().between(Data.Columns.dateCreated, dayStartMilis, dayStartMilis + DateTimeConstants.MILLIS_PER_DAY).countOf();
         } catch (SQLException e) {
             return 0;
         }
