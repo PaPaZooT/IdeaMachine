@@ -11,14 +11,11 @@ import hr.matvidako.ideamachine.Storage;
 
 public class Repository<T extends Data> implements Storage<T> {
 
-	private DBHelper db;
 	protected Dao<T, Integer> dao;
-	protected Context context;
 
 	public Repository(Context ctx, Class<T> typeParameterClass) {
-		this.context = ctx;
 		try {
-			db = DBHelper.getInstance(ctx);
+			DBHelper db = DBHelper.getInstance(ctx);
 			dao = db.getDao(typeParameterClass);
 		} catch (SQLException e) {
 			e.printStackTrace();
