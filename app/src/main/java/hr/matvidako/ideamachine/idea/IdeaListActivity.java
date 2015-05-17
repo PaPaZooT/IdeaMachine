@@ -30,6 +30,8 @@ public class IdeaListActivity extends BaseActivity implements View.OnClickListen
 
     @InjectView(android.R.id.list)
     ListView listView;
+    @InjectView(R.id.empty_idea_list)
+    TextView emptyIdeaList;
     private IdeaAdapter ideaAdapter;
     private int selectedPosition;
 
@@ -49,6 +51,7 @@ public class IdeaListActivity extends BaseActivity implements View.OnClickListen
 
     private void setupListView() {
         listView.setOnItemClickListener(this);
+        listView.setEmptyView(emptyIdeaList);
         ideaAdapter = new IdeaAdapter(this, IdeaApplication.getInstance().getIdeaStorage());
         listView.setAdapter(ideaAdapter);
     }
