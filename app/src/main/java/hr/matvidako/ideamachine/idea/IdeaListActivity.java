@@ -23,8 +23,6 @@ import butterknife.InjectView;
 import hr.matvidako.ideamachine.BaseActivity;
 import hr.matvidako.ideamachine.IdeaApplication;
 import hr.matvidako.ideamachine.R;
-import hr.matvidako.ideamachine.idea.storage.DatabaseIdeaStorage;
-import hr.matvidako.ideamachine.idea.storage.IdeaStorage;
 
 public class IdeaListActivity extends BaseActivity implements View.OnClickListener, AdapterView.OnItemClickListener, PopupMenu.OnMenuItemClickListener {
 
@@ -44,11 +42,6 @@ public class IdeaListActivity extends BaseActivity implements View.OnClickListen
         getSupportActionBar().setTitle(getString(R.string.ideas));
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-    }
-
     private void setupListView() {
         listView.setOnItemClickListener(this);
         listView.setEmptyView(emptyIdeaList);
@@ -64,7 +57,7 @@ public class IdeaListActivity extends BaseActivity implements View.OnClickListen
 
     @Override
     protected int getLayoutId() {
-        return R.layout.base_activity;
+        return R.layout.activity_base;
     }
 
     @Override
@@ -88,7 +81,7 @@ public class IdeaListActivity extends BaseActivity implements View.OnClickListen
     public boolean onMenuItemClick(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_delete) {
-            ideaAdapter.deleteIdea(ideaAdapter.getItem(selectedPosition));
+            ideaAdapter.remove(ideaAdapter.getItem(selectedPosition));
         }
         return true;
     }
@@ -106,7 +99,7 @@ public class IdeaListActivity extends BaseActivity implements View.OnClickListen
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
                     Idea idea = new Idea(etNewIdea.getText().toString());
-                    ideaAdapter.addIdea(idea);
+                    ideaAdapter.add(idea);
                     dialog.dismiss();
                     return true;
                 }
@@ -149,7 +142,7 @@ public class IdeaListActivity extends BaseActivity implements View.OnClickListen
         toast.setGravity(Gravity.CENTER, 0, 0);
         toast.show();
         Idea idea = new Idea(text);
-        ideaAdapter.addIdea(idea);
+        ideaAdapter.add(idea);
     }
 
     private void showKeyboard(final View viewInFocus) {

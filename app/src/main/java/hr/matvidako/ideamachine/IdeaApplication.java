@@ -4,11 +4,14 @@ import android.app.Application;
 import net.danlew.android.joda.JodaTimeAndroid;
 import hr.matvidako.ideamachine.idea.storage.DatabaseIdeaStorage;
 import hr.matvidako.ideamachine.idea.storage.IdeaStorage;
+import hr.matvidako.ideamachine.tag.storage.DatabaseTagStorage;
+import hr.matvidako.ideamachine.tag.storage.TagStorage;
 
 public class IdeaApplication extends Application {
 
     private static IdeaApplication instance;
     private IdeaStorage ideaStorage;
+    private TagStorage tagStorage;
 
     @Override
     public void onCreate() {
@@ -17,6 +20,7 @@ public class IdeaApplication extends Application {
         instance = this;
         ideaStorage = new DatabaseIdeaStorage(this);
         ideaStorage.updateCurrentIdeaStreak();
+        tagStorage = new DatabaseTagStorage(this);
     }
 
     public static IdeaApplication getInstance() {
@@ -25,6 +29,10 @@ public class IdeaApplication extends Application {
 
     public IdeaStorage getIdeaStorage() {
         return ideaStorage;
+    }
+
+    public TagStorage getTagStorage() {
+        return tagStorage;
     }
 
 }

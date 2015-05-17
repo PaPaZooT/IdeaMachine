@@ -7,7 +7,9 @@ import com.j256.ormlite.dao.Dao;
 import java.sql.SQLException;
 import java.util.List;
 
-public class Repository<T extends Data> {
+import hr.matvidako.ideamachine.Storage;
+
+public class Repository<T extends Data> implements Storage<T> {
 
 	private DBHelper db;
 	protected Dao<T, Integer> dao;
@@ -23,6 +25,7 @@ public class Repository<T extends Data> {
 		}
 	}
 
+	@Override
 	public int create(T item) {
 		try {
 			return dao.create(item);
@@ -32,6 +35,7 @@ public class Repository<T extends Data> {
 		return 0;
 	}
 
+	@Override
 	public int update(T item) {
 		try {
 			return dao.update(item);
@@ -41,6 +45,7 @@ public class Repository<T extends Data> {
 		return 0;
 	}
 
+	@Override
 	public int delete(T item) {
 		try {
 			return dao.delete(item);
@@ -50,6 +55,7 @@ public class Repository<T extends Data> {
 		return 0;
 	}
 
+	@Override
 	public List<T> getAll() {
 		try {
 			return dao.queryForAll();
@@ -59,6 +65,7 @@ public class Repository<T extends Data> {
 		return null;
 	}
 
+	@Override
 	public T getById(int id) {
 		try {
 			return dao.queryForId(id);

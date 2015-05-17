@@ -31,24 +31,26 @@ public class DatabaseIdeaStorage extends Repository<Idea> implements IdeaStorage
     }
 
     @Override
-    public List<Idea> loadAll() {
+    public List<Idea> getAll() {
         return getAllSortedByDateCreatedDesc();
     }
 
     @Override
-    public void store(Idea idea) {
-        create(idea);
+    public int create(Idea idea) {
+        int nRowsModified = super.create(idea);
         if(getIdeaCountForToday() == IDEA_COUNT_FOR_STREAK) {
             incrementIdeaStreak();
         }
+        return nRowsModified;
     }
 
     @Override
-    public void remove(Idea idea) {
-        delete(idea);
+    public int delete(Idea idea) {
+        int nRowsModified = super.delete(idea);
         if(getIdeaCountForToday() == IDEA_COUNT_FOR_STREAK - 1) {
             decrementIdeaStreak();
         }
+        return nRowsModified;
     }
 
     private List<Idea> getAllSortedByDateCreatedDesc() {

@@ -1,18 +1,11 @@
 package hr.matvidako.ideamachine.idea.storage;
 
-import java.util.List;
-
+import hr.matvidako.ideamachine.Storage;
 import hr.matvidako.ideamachine.idea.Idea;
 
-public interface IdeaStorage {
+public interface IdeaStorage extends Storage<Idea> {
 
     int IDEA_COUNT_FOR_STREAK = 10;
-
-    List<Idea> loadAll();
-
-    void store(Idea idea);
-
-    void remove(Idea idea);
 
     int getIdeaCountForToday();
 

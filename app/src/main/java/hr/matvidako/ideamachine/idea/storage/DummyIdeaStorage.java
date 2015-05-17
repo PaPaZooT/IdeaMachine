@@ -25,18 +25,30 @@ public class DummyIdeaStorage implements IdeaStorage {
     Random random = new Random();
 
     @Override
-    public List<Idea> loadAll() {
+    public List<Idea> getAll() {
         return ideas;
     }
 
     @Override
-    public void store(Idea idea) {
-        ideas.add(idea);
+    public Idea getById(int id) {
+        return ideas.get(0);
     }
 
     @Override
-    public void remove(Idea idea) {
+    public int create(Idea idea) {
+        ideas.add(idea);
+        return 1;
+    }
+
+    @Override
+    public int delete(Idea idea) {
         ideas.remove(idea);
+        return 1;
+    }
+
+    @Override
+    public int update(Idea item) {
+        return 1;
     }
 
     @Override

@@ -18,7 +18,7 @@ import butterknife.InjectView;
 import hr.matvidako.ideamachine.drawer.DrawerItemAdapter;
 import hr.matvidako.ideamachine.idea.storage.IdeaStorage;
 
-public abstract class BaseActivity extends ActionBarActivity implements AdapterView.OnItemClickListener {
+public abstract class BaseActivity extends ActionBarActivity {
 
     @InjectView(R.id.toolbar)
     Toolbar toolbar;

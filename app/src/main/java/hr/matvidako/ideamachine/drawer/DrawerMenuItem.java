@@ -2,11 +2,12 @@ package hr.matvidako.ideamachine.drawer;
 
 import hr.matvidako.ideamachine.R;
 import hr.matvidako.ideamachine.idea.IdeaListActivity;
+import hr.matvidako.ideamachine.tag.TagListActivity;
 
 public enum DrawerMenuItem {
 
     IDEAS(0, R.string.ideas, IdeaListActivity.class),
-    TAGS(0, R.string.tags, IdeaListActivity.class),
+    TAGS(0, R.string.tags, TagListActivity.class),
     HELP(0, R.string.help_feedback, IdeaListActivity.class),
     SETTINGS(0, R.string.settings, IdeaListActivity.class);
 

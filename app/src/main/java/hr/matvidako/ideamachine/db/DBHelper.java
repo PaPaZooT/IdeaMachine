@@ -20,7 +20,7 @@ public class DBHelper extends OrmLiteSqliteOpenHelper {
 	private static final int DATABASE_VERSION = 1;
 	private static DBHelper instance = null;
 	
-	private HashMap<String, Dao<Data, Integer>> daoMap = new HashMap<String, Dao<Data,Integer>>();
+	private HashMap<String, Dao<Data, Integer>> daoMap = new HashMap<>();
 	
 	public DBHelper(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);

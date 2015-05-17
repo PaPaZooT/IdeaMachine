@@ -1,79 +1,37 @@
 package hr.matvidako.ideamachine.idea;
 
 import android.content.Context;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.TextView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import hr.matvidako.ideamachine.BaseDataAdapter;
 import hr.matvidako.ideamachine.R;
+import hr.matvidako.ideamachine.SimpleListItemViewHolder;
 import hr.matvidako.ideamachine.idea.storage.IdeaStorage;
 
-public class IdeaAdapter extends BaseAdapter {
-
-    private List<Idea> ideas = new ArrayList<>();
-    private LayoutInflater layoutInflater;
-    private IdeaStorage ideaStorage;
+public class IdeaAdapter extends BaseDataAdapter<Idea> {
 
     public IdeaAdapter(Context context, IdeaStorage ideaStorage) {
-        this.ideaStorage = ideaStorage;
-        layoutInflater = LayoutInflater.from(context);
-        this.ideas.addAll(ideaStorage.loadAll());
+        super(context, ideaStorage);
     }
 
     @Override
-    public int getCount() {
-        return ideas.size();
+    protected int getListItemLayoutResId() {
+        return R.layout.list_item_simple;
     }
 
     @Override
-    public Idea getItem(int position) {
-        return ideas.get(position);
+    protected BaseDataAdapter.ViewHolder createViewHolder(View convertView) {
+        return new SimpleListItemViewHolder(convertView);
     }
 
     @Override
-    public long getItemId(int position) {
-        return getItem(position).getId();
-    }
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder viewHolder;
-        if(convertView == null) {
-            convertView = layoutInflater.inflate(R.layout.list_item_idea, null, false);
-            viewHolder = new ViewHolder(convertView);
-            convertView.setTag(viewHolder);
-        } else {
-            viewHolder = (ViewHolder) convertView.getTag();
-        }
-        viewHolder.title.setText(getItem(position).getContent());
-        return convertView;
-    }
-
-    public void addIdea(Idea idea) {
-        ideaStorage.store(idea);
-        ideas.add(0, idea);
-        notifyDataSetChanged();
-    }
-
-    public void deleteIdea(Idea idea) {
-        ideaStorage.remove(idea);
-        ideas.remove(idea);
-        notifyDataSetChanged();
-    }
-
-    static class ViewHolder {
-        @InjectView(R.id.idea_title) TextView title;
-
-        public ViewHolder(View view) {
-            ButterKnife.inject(this, view);
-        }
+    protected void updateView(BaseDataAdapter.ViewHolder viewHolder, Idea item) {
+        SimpleListItemViewHolder myViewHolder= (SimpleListItemViewHolder) viewHolder;
+        myViewHolder.title.setText(item.getContent());
     }
 
 }

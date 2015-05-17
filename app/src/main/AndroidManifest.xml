@@ -20,6 +20,7 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".tag.TagListActivity" android:label="@string/tags"/>
     </application>
 
 </manifest>
