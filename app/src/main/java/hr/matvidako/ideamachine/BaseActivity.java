@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,11 +34,17 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(getLayoutId());
+        setContentView(R.layout.activity_base);
+        addView(getLayoutResId());
         ButterKnife.inject(this);
         resources = getResources();
         setupToolbar();
         setupMenuDrawer();
+    }
+
+    protected void addView(int layoutId) {
+        LinearLayout rootView = ButterKnife.findById(this, R.id.root);
+        getLayoutInflater().inflate(layoutId, rootView, true);
     }
 
     private void setupToolbar() {
@@ -69,7 +76,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         drawerLayout.setDrawerListener(drawerToggle);
     }
 
-    abstract protected int getLayoutId();
+    abstract protected int getLayoutResId();
 
     @Override
     public void onBackPressed() {

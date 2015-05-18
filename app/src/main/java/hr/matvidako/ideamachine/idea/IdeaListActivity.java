@@ -18,7 +18,6 @@ import android.widget.Toast;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.melnykov.fab.FloatingActionButton;
 
-import butterknife.ButterKnife;
 import butterknife.InjectView;
 import hr.matvidako.ideamachine.BaseActivity;
 import hr.matvidako.ideamachine.IdeaApplication;
@@ -36,7 +35,6 @@ public class IdeaListActivity extends BaseActivity implements View.OnClickListen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ButterKnife.inject(this);
         setupListView();
         setupFab();
         getSupportActionBar().setTitle(getString(R.string.ideas));
@@ -56,8 +54,8 @@ public class IdeaListActivity extends BaseActivity implements View.OnClickListen
     }
 
     @Override
-    protected int getLayoutId() {
-        return R.layout.activity_base;
+    protected int getLayoutResId() {
+        return R.layout.activity_idea_list;
     }
 
     @Override

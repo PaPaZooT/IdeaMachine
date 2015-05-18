@@ -5,7 +5,7 @@ import hr.matvidako.ideamachine.R;
 
 public class TagListActivity extends BaseActivity {
     @Override
-    protected int getLayoutId() {
+    protected int getLayoutResId() {
         return R.layout.activity_base;
     }
 

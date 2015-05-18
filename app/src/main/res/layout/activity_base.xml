@@ -7,11 +7,11 @@
     android:fitsSystemWindows="true">
 
     <LinearLayout
+        android:id="@+id/root"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
         <include layout="@layout/toolbar"/>
-        <include layout="@layout/activity_idea_list"/>
     </LinearLayout>
 
     <include layout="@layout/menu_drawer"/>
