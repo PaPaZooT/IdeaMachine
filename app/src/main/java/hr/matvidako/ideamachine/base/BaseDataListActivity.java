@@ -38,6 +38,7 @@ public abstract class BaseDataListActivity<T extends Data> extends BaseActivity 
 
     private void setupListView() {
         listView.setOnItemClickListener(this);
+        emptyIdeaList.setText(getEmptyViewStringResId());
         listView.setEmptyView(emptyIdeaList);
         listView.setAdapter(getAdapter());
     }
@@ -53,4 +54,6 @@ public abstract class BaseDataListActivity<T extends Data> extends BaseActivity 
     protected abstract boolean isUsingFab();
 
     protected abstract void onFabClick();
+
+    protected abstract int getEmptyViewStringResId();
 }

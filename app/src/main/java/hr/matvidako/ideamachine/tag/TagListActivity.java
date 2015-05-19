@@ -30,6 +30,11 @@ public class TagListActivity extends BaseDataListActivity<Tag> {
     }
 
     @Override
+    protected int getEmptyViewStringResId() {
+        return R.string.no_tags;
+    }
+
+    @Override
     protected int getLayoutResId() {
         return R.layout.activity_tag_list;
     }

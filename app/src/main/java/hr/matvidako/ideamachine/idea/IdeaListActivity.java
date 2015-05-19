@@ -51,6 +51,11 @@ public class IdeaListActivity extends BaseDataListActivity<Idea> implements Popu
     }
 
     @Override
+    protected int getEmptyViewStringResId() {
+        return R.string.no_ideas;
+    }
+
+    @Override
     protected int getLayoutResId() {
         return R.layout.activity_idea_list;
     }
