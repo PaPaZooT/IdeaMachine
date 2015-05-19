@@ -12,7 +12,9 @@ import com.j256.ormlite.table.TableUtils;
 import java.sql.SQLException;
 import java.util.HashMap;
 
+import hr.matvidako.ideamachine.R;
 import hr.matvidako.ideamachine.idea.Idea;
+import hr.matvidako.ideamachine.tag.Tag;
 
 public class DBHelper extends OrmLiteSqliteOpenHelper {
 
@@ -21,20 +23,21 @@ public class DBHelper extends OrmLiteSqliteOpenHelper {
 	private static DBHelper instance = null;
 	
 	private HashMap<String, Dao<Data, Integer>> daoMap = new HashMap<>();
-	
+	private Context context;
+
 	public DBHelper(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
+		this.context = context;
 	}
 
-	public static DBHelper getInstance(Context context){
+	public static DBHelper getInstance(Context context) {
 		if(instance == null){
 			instance = OpenHelperManager.getHelper(context, DBHelper.class);
 		}
 		return instance;
 	}
 	
-	public static void releaseInstance(DBHelper helper)
-    {
+	public static void releaseInstance(DBHelper helper) {
         if (instance != null) {
             OpenHelperManager.releaseHelper();
             instance = null;
@@ -45,25 +48,22 @@ public class DBHelper extends OrmLiteSqliteOpenHelper {
 	public void onCreate(SQLiteDatabase db, ConnectionSource connectionSource) {
 		try{
 			TableUtils.createTable(connectionSource, Idea.class);
+			TableUtils.createTable(connectionSource, Tag.class);
+			createDefaultTags();
 		} catch(SQLException e){
 		}
 	}
 
+	private void createDefaultTags() {
+		Repository<Tag> tagRepository = new Repository<>(context, Tag.class);
+		String [] defaultTags = context.getResources().getStringArray(R.array.default_tags);
+	    for(String tagTitle : defaultTags) {
+            tagRepository.create(new Tag(tagTitle));
+        }
+    }
+
 	@Override
 	public void onUpgrade(SQLiteDatabase db, ConnectionSource connectionSource, int oldVersion, int newVersion) {
-	}
-
-	public Dao<Data, Integer> getDao() throws SQLException {
-		String key = Data.class.toString();
-		if(daoMap.containsKey(key) ){
-			Dao<Data, Integer> dao = daoMap.get(key);
-			if(dao != null){
-				return dao;
-			}
-		}
-		Dao<Data, Integer> newDao = getDao(Data.class);
-		daoMap.put(key, newDao);
-		return newDao;
 	}
 	
 	@Override

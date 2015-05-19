@@ -10,60 +10,49 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.melnykov.fab.FloatingActionButton;
 
-import butterknife.InjectView;
-import hr.matvidako.ideamachine.BaseActivity;
 import hr.matvidako.ideamachine.IdeaApplication;
 import hr.matvidako.ideamachine.R;
+import hr.matvidako.ideamachine.base.BaseDataAdapter;
+import hr.matvidako.ideamachine.base.BaseDataListActivity;
 
-public class IdeaListActivity extends BaseActivity implements View.OnClickListener, AdapterView.OnItemClickListener, PopupMenu.OnMenuItemClickListener {
+public class IdeaListActivity extends BaseDataListActivity<Idea> implements PopupMenu.OnMenuItemClickListener {
 
-    @InjectView(android.R.id.list)
-    ListView listView;
-    @InjectView(R.id.empty_idea_list)
-    TextView emptyIdeaList;
     private IdeaAdapter ideaAdapter;
     private int selectedPosition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setupListView();
-        setupFab();
         getSupportActionBar().setTitle(getString(R.string.ideas));
     }
 
-    private void setupListView() {
-        listView.setOnItemClickListener(this);
-        listView.setEmptyView(emptyIdeaList);
-        ideaAdapter = new IdeaAdapter(this, IdeaApplication.getInstance().getIdeaStorage());
-        listView.setAdapter(ideaAdapter);
+    @Override
+    protected BaseDataAdapter<Idea> getAdapter() {
+        if(ideaAdapter == null) {
+            ideaAdapter = new IdeaAdapter(this, IdeaApplication.getInstance().getIdeaStorage());
+        }
+        return ideaAdapter;
     }
 
-    private void setupFab() {
-        FloatingActionButton floatingActionButton = (FloatingActionButton) findViewById(R.id.fab_add_idea);
-        floatingActionButton.attachToListView(listView);
-        floatingActionButton.setOnClickListener(this);
+    @Override
+    protected boolean isUsingFab() {
+        return true;
+    }
+
+    @Override
+    protected void onFabClick() {
+        showAddNewIdeaDialog();
     }
 
     @Override
     protected int getLayoutResId() {
         return R.layout.activity_idea_list;
-    }
-
-    @Override
-    public void onClick(View v) {
-        int id = v.getId();
-        if(id == R.id.fab_add_idea) {
-            showAddNewIdeaDialog();
-        }
     }
 
     @Override

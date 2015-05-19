@@ -2,9 +2,9 @@ package hr.matvidako.ideamachine.tag;
 
 import android.content.Context;
 import android.view.View;
-import hr.matvidako.ideamachine.BaseDataAdapter;
+import hr.matvidako.ideamachine.base.BaseDataAdapter;
 import hr.matvidako.ideamachine.R;
-import hr.matvidako.ideamachine.SimpleListItemViewHolder;
+import hr.matvidako.ideamachine.base.SimpleListItemViewHolder;
 import hr.matvidako.ideamachine.Storage;
 
 public class TagAdapter extends BaseDataAdapter<Tag> {

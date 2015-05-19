@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/empty_idea_list"
+    android:id="@+id/empty_list"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
     android:text="@string/no_ideas"
     android:textColor="@color/text_dark"
-    android:textSize="@dimen/text_header">
-
-</TextView>
+    android:textSize="@dimen/text_header"/>

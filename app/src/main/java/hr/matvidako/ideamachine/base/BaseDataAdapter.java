@@ -1,4 +1,4 @@
-package hr.matvidako.ideamachine;
+package hr.matvidako.ideamachine.base;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.ButterKnife;
+import hr.matvidako.ideamachine.Storage;
 import hr.matvidako.ideamachine.db.Data;
 
 public abstract class BaseDataAdapter<T extends Data> extends BaseAdapter {

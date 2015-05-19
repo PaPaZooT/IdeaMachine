@@ -1,4 +1,4 @@
-package hr.matvidako.ideamachine;
+package hr.matvidako.ideamachine.base;
 
 import android.content.Intent;
 import android.content.res.Resources;
@@ -16,6 +16,8 @@ import android.widget.Toast;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import hr.matvidako.ideamachine.IdeaApplication;
+import hr.matvidako.ideamachine.R;
 import hr.matvidako.ideamachine.drawer.DrawerItemAdapter;
 import hr.matvidako.ideamachine.idea.storage.IdeaStorage;
 

@@ -2,14 +2,10 @@ package hr.matvidako.ideamachine.idea;
 
 import android.content.Context;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
-import butterknife.ButterKnife;
-import butterknife.InjectView;
-import hr.matvidako.ideamachine.BaseDataAdapter;
+import hr.matvidako.ideamachine.base.BaseDataAdapter;
 import hr.matvidako.ideamachine.R;
-import hr.matvidako.ideamachine.SimpleListItemViewHolder;
+import hr.matvidako.ideamachine.base.SimpleListItemViewHolder;
 import hr.matvidako.ideamachine.idea.storage.IdeaStorage;
 
 public class IdeaAdapter extends BaseDataAdapter<Idea> {
