@@ -21,10 +21,10 @@
     <string name="no_tags">Tap + to add new tag</string>
 
     <array name="default_tags">
-        <item>Favorite</item>
-        <item>Work</item>
-        <item>Personal</item>
         <item>Fun</item>
+        <item>Personal</item>
+        <item>Work</item>
+        <item>Favorite</item>
     </array>
 
 </resources>
