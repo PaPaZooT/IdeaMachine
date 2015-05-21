@@ -19,6 +19,7 @@
     <string name="new_tag_added">New tag added!</string>
     <string name="no_ideas">Tap + to add your first idea</string>
     <string name="no_tags">Tap + to add new tag</string>
+    <string name="stats">Stats</string>
 
     <array name="default_tags">
         <item>Fun</item>

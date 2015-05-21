@@ -21,6 +21,7 @@
         </activity>
 
         <activity android:name=".tag.TagListActivity" android:label="@string/tags"/>
+        <activity android:name=".stats.StatsActivity" android:label="@string/stats"/>
     </application>
 
 </manifest>
