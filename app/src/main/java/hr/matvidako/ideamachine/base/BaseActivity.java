@@ -56,7 +56,6 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected void setupMenuDrawer() {
         menuAdapter = new DrawerItemAdapter(this);
-        menuList.setAdapter(menuAdapter);
         menuList.setOnItemClickListener(new DrawerItemClickListener());
 
         View header = getLayoutInflater().inflate(R.layout.header_menu, null, false);
@@ -76,6 +75,7 @@ public abstract class BaseActivity extends AppCompatActivity {
             }
         };
         drawerLayout.setDrawerListener(drawerToggle);
+        menuList.setAdapter(menuAdapter);
     }
 
     abstract protected int getLayoutResId();
