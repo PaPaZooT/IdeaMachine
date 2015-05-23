@@ -3,6 +3,7 @@ package hr.matvidako.ideamachine;
 import android.app.Application;
 import net.danlew.android.joda.JodaTimeAndroid;
 import hr.matvidako.ideamachine.idea.storage.DatabaseIdeaStorage;
+import hr.matvidako.ideamachine.idea.storage.DummyIdeaStorage;
 import hr.matvidako.ideamachine.idea.storage.IdeaStorage;
 import hr.matvidako.ideamachine.tag.storage.DatabaseTagStorage;
 import hr.matvidako.ideamachine.tag.storage.TagStorage;

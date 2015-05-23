@@ -12,6 +12,10 @@ public class DateUtils {
         return  getStartOfToday().minusDays(1).getMillis();
     }
 
+    public static long getStartOfDayMilis(DateTime date) {
+        return date.withTime(0, 0, 0, 0).getMillis();
+    }
+
     private static DateTime getStartOfToday() {
         return  new DateTime().withTime(0, 0, 0, 0);
     }

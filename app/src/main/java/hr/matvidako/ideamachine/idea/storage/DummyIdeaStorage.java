@@ -1,5 +1,7 @@
 package hr.matvidako.ideamachine.idea.storage;
 
+import org.joda.time.DateTime;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -54,6 +56,11 @@ public class DummyIdeaStorage implements IdeaStorage {
     @Override
     public int getIdeaCountForToday() {
         return random.nextInt(11);
+    }
+
+    @Override
+    public int getIdeaCountForDay(DateTime day) {
+        return random.nextInt(20);
     }
 
     @Override
