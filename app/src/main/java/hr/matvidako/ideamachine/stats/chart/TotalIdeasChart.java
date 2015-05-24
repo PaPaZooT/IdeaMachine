@@ -4,12 +4,15 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.util.AttributeSet;
 
-import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
 
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
@@ -22,21 +25,18 @@ import java.util.List;
 import hr.matvidako.ideamachine.R;
 import hr.matvidako.ideamachine.idea.storage.IdeaStorage;
 
-public class IdeasPerDayChart extends BarChart {
+public class TotalIdeasChart extends LineChart {
 
-    private Resources res;
-
-    public IdeasPerDayChart(Context context) {
+    public TotalIdeasChart(Context context) {
         this(context, null);
     }
 
-    public IdeasPerDayChart(Context context, AttributeSet attrs) {
+    public TotalIdeasChart(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public IdeasPerDayChart(Context context, AttributeSet attrs, int defStyle) {
+    public TotalIdeasChart(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        res = getResources();
         style();
     }
 
@@ -62,20 +62,27 @@ public class IdeasPerDayChart extends BarChart {
 
     public void setupData(IdeaStorage ideaStorage, int numberOfDaysToShow) {
         List<String> dates = new ArrayList<>(numberOfDaysToShow);
-        List<BarEntry> ideaCounts = new ArrayList<>(numberOfDaysToShow);
-        DateTime currentDay = new DateTime();
+        List<Entry> ideaCounts = new ArrayList<>(numberOfDaysToShow);
         DateTimeFormatter dateFormatter = DateTimeFormat.forPattern("dd/M");
+        DateTime currentDay = new DateTime();
+        currentDay = currentDay.minusDays(numberOfDaysToShow);
+        int totalIdeas = 0;
         for(int i = 0; i < numberOfDaysToShow; i++) {
             dates.add(currentDay.toString(dateFormatter));
-            ideaCounts.add(new BarEntry(ideaStorage.getIdeaCountForDay(currentDay), reverseIndex(i, numberOfDaysToShow)));
-            currentDay = currentDay.minusDays(1);
+            totalIdeas += ideaStorage.getIdeaCountForDay(currentDay);
+            ideaCounts.add(new Entry(totalIdeas, i));
+            currentDay = currentDay.plusDays(1);
         }
-        Collections.reverse(dates);
 
-        BarDataSet dataSet = new BarDataSet(ideaCounts, "");
+        LineDataSet dataSet = new LineDataSet(ideaCounts, "");
+        Resources res = getResources();
         dataSet.setColor(res.getColor(R.color.accent));
+        dataSet.setDrawCircles(false);
+        dataSet.setDrawFilled(true);
+        dataSet.setFillColor(res.getColor(R.color.accent));
+        dataSet.setFillAlpha(255);
         dataSet.setDrawValues(false);
-        setData(new BarData(dates, dataSet));
+        setData(new LineData(dates, dataSet));
         invalidate();
     }
 
