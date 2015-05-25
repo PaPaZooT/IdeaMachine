@@ -91,7 +91,6 @@ public abstract class BaseActivity extends AppCompatActivity {
             if(position == 0) return;
             position--;
             drawerLayout.closeDrawer(menuList);
-            Toast.makeText(BaseActivity.this, menuAdapter.getItem(position).title, Toast.LENGTH_SHORT).show();
             Class activityClass = menuAdapter.getItem(position).activityClass;
             Intent i = new Intent(BaseActivity.this, activityClass);
             i.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
