@@ -1,6 +1,9 @@
 package hr.matvidako.ideamachine;
 
 import android.app.Application;
+
+import com.squareup.leakcanary.LeakCanary;
+
 import net.danlew.android.joda.JodaTimeAndroid;
 import hr.matvidako.ideamachine.idea.storage.DatabaseIdeaStorage;
 import hr.matvidako.ideamachine.idea.storage.DummyIdeaStorage;
@@ -17,6 +20,7 @@ public class IdeaApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        LeakCanary.install(this);
         JodaTimeAndroid.init(this);
         instance = this;
         ideaStorage = new DatabaseIdeaStorage(this);
