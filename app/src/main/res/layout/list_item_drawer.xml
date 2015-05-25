@@ -5,7 +5,8 @@
     android:orientation="vertical"
     android:paddingLeft="@dimen/padding_normal"
     android:paddingRight="@dimen/padding_normal"
-    android:gravity="center_vertical">
+    android:gravity="center_vertical"
+    android:background="@drawable/bg_list_item">
 
     <TextView
         android:id="@+id/title"

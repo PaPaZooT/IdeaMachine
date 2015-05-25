@@ -4,7 +4,8 @@
     android:layout_height="match_parent"
     android:padding="@dimen/padding_normal"
     android:orientation="horizontal"
-    android:gravity="center_vertical">
+    android:gravity="center_vertical"
+    android:background="@drawable/bg_list_item">
 
     <TextView
         android:id="@+id/title"
