@@ -21,6 +21,7 @@
     <string name="no_tags">Tap + to add new tag</string>
     <string name="stats">Stats</string>
     <string name="ideas_per_day">Ideas per day</string>
+    <string name="total_ideas">Total idea count</string>
 
     <array name="default_tags">
         <item>Fun</item>

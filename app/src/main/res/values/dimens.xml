@@ -7,6 +7,7 @@
     <dimen name="text_body">14sp</dimen>
     <dimen name="text_menu_drawer">14sp</dimen>
     <dimen name="text_header">22sp</dimen>
+    <dimen name="text_chart_title">18sp</dimen>
 
     <dimen name="menu_drawer_width">305dp</dimen>
     <dimen name="menu_header_image_height">200dp</dimen>
