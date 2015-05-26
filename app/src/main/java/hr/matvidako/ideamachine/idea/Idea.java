@@ -24,6 +24,10 @@ public class Idea extends Data {
         return content;
     }
 
+    public void setContent(String content) {
+        this.content = content;
+    }
+
     public interface Columns {
         String content = "content";
     }

@@ -29,6 +29,12 @@ public abstract class BaseDataListActivity<T extends Data> extends BaseActivity 
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        refreshAdapter();
+    }
+
+    @Override
     public void onClick(View v) {
         int id = v.getId();
         if(id == R.id.fab) {
@@ -41,6 +47,10 @@ public abstract class BaseDataListActivity<T extends Data> extends BaseActivity 
         emptyIdeaList.setText(getEmptyViewStringResId());
         listView.setEmptyView(emptyIdeaList);
         listView.setAdapter(getAdapter());
+    }
+
+    private void refreshAdapter() {
+        getAdapter().notifyDataSetChanged();
     }
 
     private void setupFab() {

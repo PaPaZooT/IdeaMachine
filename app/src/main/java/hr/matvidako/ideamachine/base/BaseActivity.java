@@ -66,7 +66,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, 0, 0) {
             @Override
             public void onDrawerOpened(View drawerView) {
-                IdeaStorage ideaStorage = IdeaApplication.getInstance().getIdeaStorage();
+                IdeaStorage ideaStorage = getApp().getIdeaStorage();
                 int ideasToday = ideaStorage.getIdeaCountForToday();
                 tvIdeaCount.setText(resources.getQuantityString(R.plurals.ideas_today, ideasToday, ideasToday));
                 int streak = ideaStorage.getCurrentIdeaStreak();
@@ -83,6 +83,10 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+    }
+
+    protected IdeaApplication getApp() {
+        return IdeaApplication.getInstance();
     }
 
     private class DrawerItemClickListener implements AdapterView.OnItemClickListener {

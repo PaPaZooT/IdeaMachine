@@ -22,7 +22,6 @@ public abstract class BaseDataAdapter<T extends Data> extends BaseAdapter {
     public BaseDataAdapter(Context context, Storage<T> storage) {
         this.storage = storage;
         layoutInflater = LayoutInflater.from(context);
-        this.items.addAll(storage.getAll());
     }
 
     @Override
@@ -50,6 +49,13 @@ public abstract class BaseDataAdapter<T extends Data> extends BaseAdapter {
         storage.delete(item);
         items.remove(item);
         notifyDataSetChanged();
+    }
+
+    @Override
+    public void notifyDataSetChanged() {
+        items.clear();
+        items.addAll(storage.getAll());
+        super.notifyDataSetChanged();
     }
 
     @Override

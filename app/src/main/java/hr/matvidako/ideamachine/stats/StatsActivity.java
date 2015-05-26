@@ -29,7 +29,7 @@ public class StatsActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        ideaStorage = IdeaApplication.getInstance().getIdeaStorage();
+        ideaStorage = getApp().getIdeaStorage();
         chartIdeasPerDay.setupData(ideaStorage, NUMBER_OF_DAYS_TO_SHOW);
         chartTotalIdeas.setupData(ideaStorage, NUMBER_OF_DAYS_TO_SHOW);
     }

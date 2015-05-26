@@ -18,7 +18,7 @@ public class TagListActivity extends BaseDataListActivity<Tag> implements AddIte
     @Override
     protected BaseDataAdapter<Tag> getAdapter() {
         if(tagAdapter == null) {
-            tagAdapter = new TagAdapter(this, IdeaApplication.getInstance().getTagStorage());
+            tagAdapter = new TagAdapter(this, getApp().getTagStorage());
         }
         return tagAdapter;
     }

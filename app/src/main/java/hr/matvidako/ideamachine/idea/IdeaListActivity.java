@@ -15,10 +15,9 @@ import hr.matvidako.ideamachine.base.AddItemDialogBuilder;
 import hr.matvidako.ideamachine.base.BaseDataAdapter;
 import hr.matvidako.ideamachine.base.BaseDataListActivity;
 
-public class IdeaListActivity extends BaseDataListActivity<Idea> implements PopupMenu.OnMenuItemClickListener, AddItemDialogBuilder.OnAddListener {
+public class IdeaListActivity extends BaseDataListActivity<Idea> implements AddItemDialogBuilder.OnAddListener {
 
     private IdeaAdapter ideaAdapter;
-    private int selectedPosition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +28,7 @@ public class IdeaListActivity extends BaseDataListActivity<Idea> implements Popu
     @Override
     protected BaseDataAdapter<Idea> getAdapter() {
         if(ideaAdapter == null) {
-            ideaAdapter = new IdeaAdapter(this, IdeaApplication.getInstance().getIdeaStorage());
+            ideaAdapter = new IdeaAdapter(this, getApp().getIdeaStorage());
         }
         return ideaAdapter;
     }
@@ -56,20 +55,7 @@ public class IdeaListActivity extends BaseDataListActivity<Idea> implements Popu
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        PopupMenu popupMenu = new PopupMenu(this, view);
-        popupMenu.setOnMenuItemClickListener(this);
-        popupMenu.inflate(R.menu.menu_idea);
-        popupMenu.show();
-        selectedPosition = position;
-    }
-
-    @Override
-    public boolean onMenuItemClick(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.action_delete) {
-            ideaAdapter.remove(ideaAdapter.getItem(selectedPosition));
-        }
-        return true;
+        startActivity(IdeaDetailsActivity.buildIntent(this, (int)ideaAdapter.getItemId(position)));
     }
 
     private void showAddNewIdeaDialog() {
@@ -81,15 +67,10 @@ public class IdeaListActivity extends BaseDataListActivity<Idea> implements Popu
 
     @Override
     public void onAdd(String text) {
-        addNewIdea(text);
-    }
-
-    private void addNewIdea(String text) {
         Toast toast = Toast.makeText(this, R.string.new_idea_added, Toast.LENGTH_SHORT);
         toast.setGravity(Gravity.CENTER, 0, 0);
         toast.show();
         ideaAdapter.add(new Idea(text));
     }
-
 
 }
