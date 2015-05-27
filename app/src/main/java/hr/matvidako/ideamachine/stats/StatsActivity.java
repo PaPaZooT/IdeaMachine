@@ -39,4 +39,9 @@ public class StatsActivity extends BaseActivity {
         return R.layout.activity_stats;
     }
 
+    @Override
+    protected int getMenuResId() {
+        return 0;
+    }
+
 }

@@ -7,6 +7,8 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
@@ -80,9 +82,20 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     abstract protected int getLayoutResId();
 
+    abstract protected int getMenuResId();
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        if(getMenuResId() != 0) {
+            MenuInflater inflater = getMenuInflater();
+            inflater.inflate(getMenuResId(), menu);
+        }
+        return super.onCreateOptionsMenu(menu);
     }
 
     protected IdeaApplication getApp() {

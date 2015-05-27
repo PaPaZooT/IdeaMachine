@@ -3,7 +3,11 @@ package hr.matvidako.ideamachine.idea;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -43,6 +47,22 @@ public class IdeaDetailsActivity extends BaseActivity {
     @Override
     protected int getLayoutResId() {
         return R.layout.activity_idea_details;
+    }
+
+    @Override
+    protected int getMenuResId() {
+        return R.menu.menu_idea;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == R.id.action_delete) {
+            ideaStorage.delete(idea);
+            finish();
+            Toast.makeText(this, getString(R.string.idea_deleted), Toast.LENGTH_SHORT).show();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void loadDataFromIntent(Intent intent) {

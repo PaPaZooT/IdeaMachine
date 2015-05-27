@@ -42,6 +42,11 @@ public abstract class BaseDataListActivity<T extends Data> extends BaseActivity 
         }
     }
 
+    @Override
+    protected int getMenuResId() {
+        return 0;
+    }
+
     private void setupListView() {
         listView.setOnItemClickListener(this);
         emptyIdeaList.setText(getEmptyViewStringResId());
