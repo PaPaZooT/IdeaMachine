@@ -3,8 +3,6 @@ package hr.matvidako.ideamachine.idea;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -56,13 +54,29 @@ public class IdeaDetailsActivity extends BaseActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == R.id.action_delete) {
-            ideaStorage.delete(idea);
-            finish();
-            Toast.makeText(this, getString(R.string.idea_deleted), Toast.LENGTH_SHORT).show();
+        int id = item.getItemId();
+        if(id == R.id.action_delete) {
+            onDeleteIdea();
+            return true;
+        } else if(id == R.id.action_share) {
+            onShareIdea();
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void onDeleteIdea() {
+        ideaStorage.delete(idea);
+        finish();
+        Toast.makeText(this, getString(R.string.idea_deleted), Toast.LENGTH_SHORT).show();
+    }
+
+    private void onShareIdea() {
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_TEXT, idea.getContent());
+        startActivity(intent);
     }
 
     private void loadDataFromIntent(Intent intent) {
