@@ -10,10 +10,11 @@ import android.widget.Toast;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import hr.matvidako.ideamachine.R;
-import hr.matvidako.ideamachine.base.BaseActivity;
+import hr.matvidako.ideamachine.base.MenuActivity;
+import hr.matvidako.ideamachine.base.UpActivity;
 import hr.matvidako.ideamachine.idea.storage.IdeaStorage;
 
-public class IdeaDetailsActivity extends BaseActivity {
+public class IdeaDetailsActivity extends UpActivity {
 
     private static String EXTRA_IDEA_ID = "ideaId";
     private Idea idea;
@@ -29,6 +30,7 @@ public class IdeaDetailsActivity extends BaseActivity {
         ideaStorage = getApp().getIdeaStorage();
         loadDataFromIntent(getIntent());
         etIdeaContent.setText(idea.getContent());
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override

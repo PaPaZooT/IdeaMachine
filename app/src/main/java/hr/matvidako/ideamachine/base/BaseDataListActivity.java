@@ -12,7 +12,7 @@ import butterknife.InjectView;
 import hr.matvidako.ideamachine.R;
 import hr.matvidako.ideamachine.db.Data;
 
-public abstract class BaseDataListActivity<T extends Data> extends BaseActivity implements AdapterView.OnItemClickListener, View.OnClickListener {
+public abstract class BaseDataListActivity<T extends Data> extends MenuActivity implements AdapterView.OnItemClickListener, View.OnClickListener {
 
     @InjectView(R.id.list)
     protected ListView listView;

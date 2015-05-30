@@ -4,11 +4,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import hr.matvidako.ideamachine.R;
-import hr.matvidako.ideamachine.base.BaseActivity;
+import hr.matvidako.ideamachine.base.UpActivity;
 import hr.matvidako.ideamachine.tag.Tag;
 import hr.matvidako.ideamachine.tag.storage.TagStorage;
 
-public class IdeasByTagListActivity extends BaseActivity {
+public class IdeasByTagListActivity extends UpActivity {
 
     private static final String EXTRA_TAG_ID = "tagId";
     private Tag tag;
