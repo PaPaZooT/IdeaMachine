@@ -110,6 +110,7 @@ public abstract class BaseActivity extends AppCompatActivity {
             drawerLayout.closeDrawer(menuList);
             Class activityClass = menuAdapter.getItem(position).activityClass;
             Intent i = new Intent(BaseActivity.this, activityClass);
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             i.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(i);
         }
