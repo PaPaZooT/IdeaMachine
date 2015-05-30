@@ -10,6 +10,7 @@ import hr.matvidako.ideamachine.R;
 import hr.matvidako.ideamachine.base.AddItemDialogBuilder;
 import hr.matvidako.ideamachine.base.BaseDataAdapter;
 import hr.matvidako.ideamachine.base.BaseDataListActivity;
+import hr.matvidako.ideamachine.ideatag.IdeasByTagListActivity;
 
 public class TagListActivity extends BaseDataListActivity<Tag> implements AddItemDialogBuilder.OnAddListener {
 
@@ -52,7 +53,7 @@ public class TagListActivity extends BaseDataListActivity<Tag> implements AddIte
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+        startActivity(IdeasByTagListActivity.buildIntent(this, (int) tagAdapter.getItemId(position)));
     }
 
     @Override

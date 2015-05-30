@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">IdeaMachine</string>
     <string name="action_settings">Settings</string>
-    <string name="order" formatted="false">%d. %s</string>
     <string name="title_add_idea">Add idea</string>
     <string name="add_and_next">Add and next</string>
     <string name="cancel">Cancel</string>
@@ -24,6 +23,7 @@
     <string name="total_ideas">Total idea count</string>
     <string name="idea_deleted">Idea deleted!</string>
     <string name="action_share">Share</string>
+    <string name="tag_ideas" formatted="false">%s ideas</string>
 
     <array name="default_tags">
         <item>Fun</item>
