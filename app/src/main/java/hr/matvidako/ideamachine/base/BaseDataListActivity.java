@@ -1,14 +1,14 @@
 package hr.matvidako.ideamachine.base;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.melnykov.fab.FloatingActionButton;
-
 import butterknife.InjectView;
+import butterknife.Optional;
 import hr.matvidako.ideamachine.R;
 import hr.matvidako.ideamachine.db.Data;
 
@@ -18,6 +18,8 @@ public abstract class BaseDataListActivity<T extends Data> extends MenuActivity 
     protected ListView listView;
     @InjectView(R.id.empty_list)
     protected TextView emptyIdeaList;
+    @Optional @InjectView(R.id.fab)
+    FloatingActionButton floatingActionButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,8 +61,6 @@ public abstract class BaseDataListActivity<T extends Data> extends MenuActivity 
     }
 
     private void setupFab() {
-        FloatingActionButton floatingActionButton = (FloatingActionButton) findViewById(R.id.fab);
-        floatingActionButton.attachToListView(listView);
         floatingActionButton.setOnClickListener(this);
     }
 
