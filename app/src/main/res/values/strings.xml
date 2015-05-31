@@ -24,6 +24,7 @@
     <string name="idea_deleted">Idea deleted!</string>
     <string name="action_share">Share</string>
     <string name="tag_ideas" formatted="false">%s ideas</string>
+    <string name="tag_deleted">Tag deleted!</string>
 
     <array name="default_tags">
         <item>Fun</item>

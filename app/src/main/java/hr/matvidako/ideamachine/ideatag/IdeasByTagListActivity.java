@@ -3,6 +3,9 @@ package hr.matvidako.ideamachine.ideatag;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
+import android.widget.Toast;
+
 import hr.matvidako.ideamachine.R;
 import hr.matvidako.ideamachine.base.UpActivity;
 import hr.matvidako.ideamachine.tag.Tag;
@@ -20,6 +23,24 @@ public class IdeasByTagListActivity extends UpActivity {
         tagStorage = getApp().getTagStorage();
         loadDataFromIntent(getIntent());
         getSupportActionBar().setTitle(getString(R.string.tag_ideas, tag.getTitle()));
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if(id == R.id.action_delete) {
+            onDeleteTag();
+            return true;
+        } else if(id == R.id.action_edit) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void onDeleteTag() {
+        tagStorage.delete(tag);
+        finish();
+        Toast.makeText(this, getString(R.string.tag_deleted), Toast.LENGTH_SHORT).show();
     }
 
     private void loadDataFromIntent(Intent intent) {
