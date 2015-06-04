@@ -4,14 +4,18 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import hr.matvidako.ideamachine.R;
+import hr.matvidako.ideamachine.base.AddItemDialogBuilder;
 import hr.matvidako.ideamachine.base.UpActivity;
+import hr.matvidako.ideamachine.base.UpdateItemDialogBuilder;
 import hr.matvidako.ideamachine.tag.Tag;
 import hr.matvidako.ideamachine.tag.storage.TagStorage;
 
-public class IdeasByTagListActivity extends UpActivity {
+public class IdeasByTagListActivity extends UpActivity implements UpdateItemDialogBuilder.OnUpdateListener {
 
     private static final String EXTRA_TAG_ID = "tagId";
     private Tag tag;
@@ -22,7 +26,7 @@ public class IdeasByTagListActivity extends UpActivity {
         super.onCreate(savedInstanceState);
         tagStorage = getApp().getTagStorage();
         loadDataFromIntent(getIntent());
-        getSupportActionBar().setTitle(getString(R.string.tag_ideas, tag.getTitle()));
+        setTitle(getString(R.string.tag_ideas, tag.getTitle()));
     }
 
     @Override
@@ -32,6 +36,7 @@ public class IdeasByTagListActivity extends UpActivity {
             onDeleteTag();
             return true;
         } else if(id == R.id.action_edit) {
+            showUpdateTagDialog();
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -41,6 +46,13 @@ public class IdeasByTagListActivity extends UpActivity {
         tagStorage.delete(tag);
         finish();
         Toast.makeText(this, getString(R.string.tag_deleted), Toast.LENGTH_SHORT).show();
+    }
+
+    private void showUpdateTagDialog() {
+        View dialogContentView = getLayoutInflater().inflate(R.layout.dialog_new_item, null, false);
+        final EditText etNewIdea = (EditText) dialogContentView.findViewById(R.id.new_item);
+        etNewIdea.setText(tag.getTitle());
+        UpdateItemDialogBuilder.build(this, etNewIdea, dialogContentView, this).show();
     }
 
     private void loadDataFromIntent(Intent intent) {
@@ -65,5 +77,12 @@ public class IdeasByTagListActivity extends UpActivity {
     @Override
     protected int getMenuResId() {
         return R.menu.menu_tag;
+    }
+
+    @Override
+    public void onUpdate(String text) {
+        tag.setTitle(text);
+        tagStorage.update(tag);
+        setTitle(getString(R.string.tag_ideas, tag.getTitle()));
     }
 }

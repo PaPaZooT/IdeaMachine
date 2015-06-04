@@ -21,6 +21,10 @@ public class Tag extends Data {
         return title;
     }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public interface Columns {
         String title = "title";
     }
