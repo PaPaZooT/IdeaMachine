@@ -17,6 +17,9 @@ import java.util.List;
 import hr.matvidako.ideamachine.db.Data;
 import hr.matvidako.ideamachine.db.Repository;
 import hr.matvidako.ideamachine.idea.Idea;
+import hr.matvidako.ideamachine.ideatag.IdeaByTag;
+import hr.matvidako.ideamachine.ideatag.IdeaByTagStorage;
+import hr.matvidako.ideamachine.tag.Tag;
 import hr.matvidako.ideamachine.utils.DateUtils;
 
 public class DatabaseIdeaStorage extends Repository<Idea> implements IdeaStorage {
@@ -24,10 +27,12 @@ public class DatabaseIdeaStorage extends Repository<Idea> implements IdeaStorage
     private static final String PREFS = "idea_prefs";
     private static final String PREF_STREAK = "idea/streak";
     private SharedPreferences prefs;
+    private IdeaByTagStorage ideaByTagStorage;
 
     public DatabaseIdeaStorage(Context context) {
         super(context, Idea.class);
         prefs = context.getSharedPreferences(PREFS, Context.MODE_PRIVATE);
+        ideaByTagStorage = new IdeaByTagStorage(context);
     }
 
     @Override
@@ -94,6 +99,20 @@ public class DatabaseIdeaStorage extends Repository<Idea> implements IdeaStorage
             } else {
                 storeIdeaStreak(0);
             }
+        }
+    }
+
+    @Override
+    public List<Idea> getByTag(Tag tag) {
+        List<IdeaByTag> ideaByTagList = ideaByTagStorage.getByTag(tag);
+        List<Integer> ideaIds = new ArrayList<>();
+        for(IdeaByTag ideaByTag : ideaByTagList) {
+            ideaIds.add(ideaByTag.getIdeaId());
+        }
+        try {
+            return dao.queryBuilder().where().in("id", ideaIds).query();
+        } catch (SQLException e) {
+            return new ArrayList<>();
         }
     }
 

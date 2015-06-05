@@ -14,6 +14,7 @@ import java.util.HashMap;
 
 import hr.matvidako.ideamachine.R;
 import hr.matvidako.ideamachine.idea.Idea;
+import hr.matvidako.ideamachine.ideatag.IdeaByTag;
 import hr.matvidako.ideamachine.tag.Tag;
 
 public class DBHelper extends OrmLiteSqliteOpenHelper {
@@ -49,6 +50,7 @@ public class DBHelper extends OrmLiteSqliteOpenHelper {
 		try{
 			TableUtils.createTable(connectionSource, Idea.class);
 			TableUtils.createTable(connectionSource, Tag.class);
+			TableUtils.createTable(connectionSource, IdeaByTag.class);
 			createDefaultTags();
 		} catch(SQLException e){
 		}

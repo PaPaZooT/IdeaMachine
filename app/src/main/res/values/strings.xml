@@ -17,6 +17,7 @@
     <string name="new_idea_added">New idea added!</string>
     <string name="new_tag_added">New tag added!</string>
     <string name="no_ideas">Tap + to add your first idea</string>
+    <string name="no_ideas_for_tag">Tap + to add new idea with this tag</string>
     <string name="no_tags">Tap + to add new tag</string>
     <string name="stats">Stats</string>
     <string name="ideas_per_day">Ideas per day</string>

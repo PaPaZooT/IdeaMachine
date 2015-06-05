@@ -3,10 +3,12 @@ package hr.matvidako.ideamachine.idea.storage;
 import org.joda.time.DateTime;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
 import hr.matvidako.ideamachine.idea.Idea;
+import hr.matvidako.ideamachine.tag.Tag;
 
 public class DummyIdeaStorage implements IdeaStorage {
 
@@ -70,6 +72,11 @@ public class DummyIdeaStorage implements IdeaStorage {
 
     @Override
     public void updateCurrentIdeaStreak() {
+    }
+
+    @Override
+    public List<Idea> getByTag(Tag tag) {
+        return getAll().subList(0, 2);
     }
 
 }
