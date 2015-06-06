@@ -2,10 +2,11 @@ package hr.matvidako.ideamachine.idea;
 
 import android.content.Context;
 import android.view.View;
+import android.widget.TextView;
 
+import butterknife.InjectView;
 import hr.matvidako.ideamachine.base.BaseDataAdapter;
 import hr.matvidako.ideamachine.R;
-import hr.matvidako.ideamachine.base.SimpleListItemViewHolder;
 import hr.matvidako.ideamachine.idea.storage.IdeaStorage;
 
 public class IdeaAdapter extends BaseDataAdapter<Idea> {
@@ -21,13 +22,21 @@ public class IdeaAdapter extends BaseDataAdapter<Idea> {
 
     @Override
     protected BaseDataAdapter.ViewHolder createViewHolder(View convertView) {
-        return new SimpleListItemViewHolder(convertView);
+        return new IdeaViewHolder(convertView);
     }
 
-    @Override
-    protected void updateView(BaseDataAdapter.ViewHolder viewHolder, Idea item) {
-        SimpleListItemViewHolder myViewHolder= (SimpleListItemViewHolder) viewHolder;
-        myViewHolder.title.setText(item.getContent());
+    static class IdeaViewHolder extends BaseDataAdapter.ViewHolder<Idea> {
+        @InjectView(R.id.title)
+        public TextView title;
+
+        public IdeaViewHolder(View view) {
+            super(view);
+        }
+
+        @Override
+        public void update(Idea item) {
+            title.setText(item.getContent());
+        }
     }
 
 }

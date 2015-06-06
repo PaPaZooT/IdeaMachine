@@ -1,15 +1,6 @@
 package hr.matvidako.ideamachine.idea;
 
 import android.os.Bundle;
-import android.view.Gravity;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.EditText;
-import android.widget.PopupMenu;
-import android.widget.Toast;
-
-import hr.matvidako.ideamachine.IdeaApplication;
 import hr.matvidako.ideamachine.R;
 import hr.matvidako.ideamachine.base.AddItemDialogBuilder;
 import hr.matvidako.ideamachine.base.BaseDataAdapter;
@@ -54,8 +45,8 @@ public class IdeaListActivity extends BaseDataListActivity<Idea> implements AddI
     }
 
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        startActivity(IdeaDetailsActivity.buildIntent(this, (int)ideaAdapter.getItemId(position)));
+    public void onItemClick(int position) {
+        startActivity(IdeaDetailsActivity.buildIntent(this, getAdapter().getItem(position).getId()));
     }
 
     private void showAddNewIdeaDialog() {

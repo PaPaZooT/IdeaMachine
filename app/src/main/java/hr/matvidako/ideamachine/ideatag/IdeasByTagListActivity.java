@@ -5,20 +5,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import com.afollestad.materialdialogs.util.DialogUtils;
 
 import hr.matvidako.ideamachine.R;
 import hr.matvidako.ideamachine.base.AddItemDialogBuilder;
 import hr.matvidako.ideamachine.base.BaseDataAdapter;
 import hr.matvidako.ideamachine.base.BaseDataListActivity;
-import hr.matvidako.ideamachine.base.UpActivity;
 import hr.matvidako.ideamachine.base.UpdateItemDialogBuilder;
 import hr.matvidako.ideamachine.idea.Idea;
-import hr.matvidako.ideamachine.idea.IdeaAdapter;
 import hr.matvidako.ideamachine.idea.IdeaDetailsActivity;
 import hr.matvidako.ideamachine.idea.storage.IdeaStorage;
 import hr.matvidako.ideamachine.tag.Tag;
@@ -122,7 +117,7 @@ public class IdeasByTagListActivity extends BaseDataListActivity<Idea> implement
     }
 
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+    public void onItemClick(int position) {
         startActivity(IdeaDetailsActivity.buildIntent(this, (int) getAdapter().getItemId(position)));
     }
 

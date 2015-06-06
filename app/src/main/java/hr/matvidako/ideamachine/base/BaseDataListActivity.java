@@ -2,6 +2,9 @@ package hr.matvidako.ideamachine.base;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -12,14 +15,15 @@ import butterknife.Optional;
 import hr.matvidako.ideamachine.R;
 import hr.matvidako.ideamachine.db.Data;
 
-public abstract class BaseDataListActivity<T extends Data> extends MenuActivity implements AdapterView.OnItemClickListener, View.OnClickListener {
+public abstract class BaseDataListActivity<T extends Data> extends MenuActivity implements BaseDataAdapter.OnItemClickListener, View.OnClickListener {
 
-    @InjectView(R.id.list)
-    protected ListView listView;
     @InjectView(R.id.empty_list)
     protected TextView emptyIdeaList;
     @Optional @InjectView(R.id.fab)
     FloatingActionButton floatingActionButton;
+
+    @InjectView(R.id.list)
+    RecyclerView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,14 +54,16 @@ public abstract class BaseDataListActivity<T extends Data> extends MenuActivity 
     }
 
     private void setupListView() {
-        listView.setOnItemClickListener(this);
-        emptyIdeaList.setText(getEmptyViewStringResId());
-        listView.setEmptyView(emptyIdeaList);
+        //emptyIdeaList.setText(getEmptyViewStringResId());
+        //listView.setEmptyView(emptyIdeaList);
+        listView.setLayoutManager(new LinearLayoutManager(this));
         listView.setAdapter(getAdapter());
+        getAdapter().setOnItemClickListener(this);
+        listView.setItemAnimator(new DefaultItemAnimator());
     }
 
     private void refreshAdapter() {
-        getAdapter().notifyDataSetChanged();
+        getAdapter().refresh();
     }
 
     private void setupFab() {
@@ -71,4 +77,5 @@ public abstract class BaseDataListActivity<T extends Data> extends MenuActivity 
     protected abstract void onFabClick();
 
     protected abstract int getEmptyViewStringResId();
+
 }

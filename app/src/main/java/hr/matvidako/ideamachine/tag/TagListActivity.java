@@ -1,11 +1,9 @@
 package hr.matvidako.ideamachine.tag;
 
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import hr.matvidako.ideamachine.IdeaApplication;
 import hr.matvidako.ideamachine.R;
 import hr.matvidako.ideamachine.base.AddItemDialogBuilder;
 import hr.matvidako.ideamachine.base.BaseDataAdapter;
@@ -51,8 +49,9 @@ public class TagListActivity extends BaseDataListActivity<Tag> implements AddIte
         return R.layout.activity_tag_list;
     }
 
+
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+    public void onItemClick(int position) {
         startActivity(IdeasByTagListActivity.buildIntent(this, (int) tagAdapter.getItemId(position)));
     }
 

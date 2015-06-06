@@ -2,9 +2,11 @@ package hr.matvidako.ideamachine.tag;
 
 import android.content.Context;
 import android.view.View;
+import android.widget.TextView;
+
+import butterknife.InjectView;
 import hr.matvidako.ideamachine.base.BaseDataAdapter;
 import hr.matvidako.ideamachine.R;
-import hr.matvidako.ideamachine.base.SimpleListItemViewHolder;
 import hr.matvidako.ideamachine.Storage;
 
 public class TagAdapter extends BaseDataAdapter<Tag> {
@@ -20,13 +22,21 @@ public class TagAdapter extends BaseDataAdapter<Tag> {
 
     @Override
     protected ViewHolder createViewHolder(View convertView) {
-        return new SimpleListItemViewHolder(convertView);
+        return new TagViewHolder(convertView);
     }
 
-    @Override
-    protected void updateView(ViewHolder viewHolder, Tag item) {
-        SimpleListItemViewHolder myViewHolder= (SimpleListItemViewHolder) viewHolder;
-        myViewHolder.title.setText(item.getTitle());
+    static class TagViewHolder extends BaseDataAdapter.ViewHolder<Tag> {
+        @InjectView(R.id.title)
+        public TextView title;
+
+        public TagViewHolder(View view) {
+            super(view);
+        }
+
+        @Override
+        public void update(Tag item) {
+            title.setText(item.getTitle());
+        }
     }
 
 }
