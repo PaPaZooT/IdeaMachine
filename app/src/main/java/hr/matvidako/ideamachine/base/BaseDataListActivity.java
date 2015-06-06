@@ -6,8 +6,6 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import butterknife.InjectView;
@@ -23,7 +21,7 @@ public abstract class BaseDataListActivity<T extends Data> extends MenuActivity 
     FloatingActionButton floatingActionButton;
 
     @InjectView(R.id.list)
-    RecyclerView listView;
+    protected RecyclerView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

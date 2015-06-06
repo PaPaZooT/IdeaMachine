@@ -57,7 +57,7 @@ public class TagListActivity extends BaseDataListActivity<Tag> implements AddIte
 
     @Override
     public void onAdd(String text) {
-         Toast.makeText(this, R.string.new_tag_added, Toast.LENGTH_SHORT).show();
+        listView.scrollToPosition(0);
         tagAdapter.add(new Tag(text));
     }
 }

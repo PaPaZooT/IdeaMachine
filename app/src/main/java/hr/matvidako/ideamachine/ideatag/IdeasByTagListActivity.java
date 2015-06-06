@@ -123,6 +123,7 @@ public class IdeasByTagListActivity extends BaseDataListActivity<Idea> implement
 
     @Override
     public void onAdd(String text) {
+        listView.scrollToPosition(0);
         ideaByTagAdapter.add(new Idea(text));
     }
 

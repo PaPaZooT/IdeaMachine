@@ -55,6 +55,7 @@ public class IdeaListActivity extends BaseDataListActivity<Idea> implements AddI
 
     @Override
     public void onAdd(String text) {
+        listView.scrollToPosition(0);
         ideaAdapter.add(new Idea(text));
     }
 

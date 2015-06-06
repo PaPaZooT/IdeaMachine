@@ -52,7 +52,8 @@ public abstract class BaseDataAdapter<T extends Data> extends RecyclerView.Adapt
 
     public void add(T item) {
         storage.create(item);
-        refresh();
+        items.add(0, item);
+        notifyItemInserted(0);
     }
 
     public void remove(T item) {

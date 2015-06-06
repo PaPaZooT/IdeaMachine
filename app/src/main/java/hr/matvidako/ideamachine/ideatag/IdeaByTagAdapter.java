@@ -29,6 +29,7 @@ public class IdeaByTagAdapter extends IdeaAdapter {
     public void add(Idea item) {
         ideaStorage.create(item);
         ideaStorage.addTagToIdea(item, tag);
-        refresh();
+        items.add(0, item);
+        notifyItemInserted(0);
     }
 }
