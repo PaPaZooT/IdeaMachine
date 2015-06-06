@@ -59,17 +59,11 @@ public class IdeaListActivity extends BaseDataListActivity<Idea> implements AddI
     }
 
     private void showAddNewIdeaDialog() {
-        View dialogContentView = getLayoutInflater().inflate(R.layout.dialog_new_item, null, false);
-        final EditText etNewIdea = (EditText) dialogContentView.findViewById(R.id.new_item);
-        etNewIdea.setHint(R.string.hint_new_idea);
-        AddItemDialogBuilder.build(this, etNewIdea, dialogContentView, this).show();
+        AddItemDialogBuilder.build(this, R.string.hint_new_idea, this).show();
     }
 
     @Override
     public void onAdd(String text) {
-        Toast toast = Toast.makeText(this, R.string.new_idea_added, Toast.LENGTH_SHORT);
-        toast.setGravity(Gravity.CENTER, 0, 0);
-        toast.show();
         ideaAdapter.add(new Idea(text));
     }
 

@@ -24,7 +24,6 @@ public abstract class BaseDataListActivity<T extends Data> extends MenuActivity 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setupListView();
         if(isUsingFab()) {
             setupFab();
         }
@@ -33,6 +32,7 @@ public abstract class BaseDataListActivity<T extends Data> extends MenuActivity 
     @Override
     protected void onResume() {
         super.onResume();
+        setupListView();
         refreshAdapter();
     }
 

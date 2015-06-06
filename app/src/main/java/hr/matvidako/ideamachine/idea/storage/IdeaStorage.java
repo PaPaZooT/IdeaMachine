@@ -21,4 +21,6 @@ public interface IdeaStorage extends Storage<Idea> {
     void updateCurrentIdeaStreak();
 
     List<Idea> getByTag(Tag tag);
+
+    void addTagToIdea(Idea idea, Tag tag);
 }

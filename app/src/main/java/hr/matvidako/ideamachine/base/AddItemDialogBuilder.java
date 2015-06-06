@@ -2,6 +2,7 @@ package hr.matvidako.ideamachine.base;
 
 import android.content.Context;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
@@ -13,6 +14,13 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import hr.matvidako.ideamachine.R;
 
 public class AddItemDialogBuilder {
+
+    public static MaterialDialog build(final Context context, int hintStringResId, OnAddListener onAddListener) {
+        View dialogContentView = LayoutInflater.from(context).inflate(R.layout.dialog_new_item, null, false);
+        final EditText etNewItem = (EditText) dialogContentView.findViewById(R.id.new_item);
+        etNewItem.setHint(hintStringResId);
+        return build(context, etNewItem, dialogContentView, onAddListener);
+    }
 
     public static MaterialDialog build(final Context context, final EditText etInput, View dialogContentView, final OnAddListener onAddListener) {
         final MaterialDialog dialog = new MaterialDialog.Builder(context)

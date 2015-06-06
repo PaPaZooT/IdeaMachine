@@ -41,21 +41,23 @@ public abstract class BaseDataAdapter<T extends Data> extends BaseAdapter {
 
     public void add(T item) {
         storage.create(item);
-        items.add(0, item);
         notifyDataSetChanged();
     }
 
     public void remove(T item) {
         storage.delete(item);
-        items.remove(item);
         notifyDataSetChanged();
     }
 
     @Override
     public void notifyDataSetChanged() {
         items.clear();
-        items.addAll(storage.getAll());
+        items.addAll(getAllItems());
         super.notifyDataSetChanged();
+    }
+
+    protected List<T> getAllItems() {
+        return storage.getAll();
     }
 
     @Override

@@ -79,4 +79,9 @@ public class DummyIdeaStorage implements IdeaStorage {
         return getAll().subList(0, 2);
     }
 
+    @Override
+    public void addTagToIdea(Idea idea, Tag tag) {
+    }
+
+
 }

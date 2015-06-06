@@ -110,10 +110,15 @@ public class DatabaseIdeaStorage extends Repository<Idea> implements IdeaStorage
             ideaIds.add(ideaByTag.getIdeaId());
         }
         try {
-            return dao.queryBuilder().where().in("id", ideaIds).query();
+            return dao.queryBuilder().orderBy(Data.Columns.dateCreated, false).where().in("id", ideaIds).query();
         } catch (SQLException e) {
             return new ArrayList<>();
         }
+    }
+
+    @Override
+    public void addTagToIdea(Idea idea, Tag tag) {
+        ideaByTagStorage.create(new IdeaByTag(idea, tag));
     }
 
     private void incrementIdeaStreak() {

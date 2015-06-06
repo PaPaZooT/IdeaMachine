@@ -9,6 +9,8 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.util.DialogUtils;
+
 import hr.matvidako.ideamachine.R;
 import hr.matvidako.ideamachine.base.AddItemDialogBuilder;
 import hr.matvidako.ideamachine.base.BaseDataAdapter;
@@ -17,16 +19,18 @@ import hr.matvidako.ideamachine.base.UpActivity;
 import hr.matvidako.ideamachine.base.UpdateItemDialogBuilder;
 import hr.matvidako.ideamachine.idea.Idea;
 import hr.matvidako.ideamachine.idea.IdeaAdapter;
+import hr.matvidako.ideamachine.idea.IdeaDetailsActivity;
 import hr.matvidako.ideamachine.idea.storage.IdeaStorage;
 import hr.matvidako.ideamachine.tag.Tag;
 import hr.matvidako.ideamachine.tag.storage.TagStorage;
 
-public class IdeasByTagListActivity extends BaseDataListActivity<Idea> implements UpdateItemDialogBuilder.OnUpdateListener {
+public class IdeasByTagListActivity extends BaseDataListActivity<Idea> implements UpdateItemDialogBuilder.OnUpdateListener, AddItemDialogBuilder.OnAddListener {
 
     private static final String EXTRA_TAG_ID = "tagId";
     private Tag tag;
     private TagStorage tagStorage;
     private IdeaStorage ideaStorage;
+    private IdeaByTagAdapter ideaByTagAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -89,7 +93,10 @@ public class IdeasByTagListActivity extends BaseDataListActivity<Idea> implement
 
     @Override
     protected BaseDataAdapter<Idea> getAdapter() {
-        return new IdeaAdapter(this, ideaStorage);
+        if(ideaByTagAdapter == null) {
+            ideaByTagAdapter = new IdeaByTagAdapter(this, ideaStorage, tag);
+        }
+        return ideaByTagAdapter;
     }
 
     @Override
@@ -99,6 +106,7 @@ public class IdeasByTagListActivity extends BaseDataListActivity<Idea> implement
 
     @Override
     protected void onFabClick() {
+        AddItemDialogBuilder.build(this, R.string.hint_new_idea, this).show();
     }
 
     @Override
@@ -115,6 +123,12 @@ public class IdeasByTagListActivity extends BaseDataListActivity<Idea> implement
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+        startActivity(IdeaDetailsActivity.buildIntent(this, (int) getAdapter().getItemId(position)));
     }
+
+    @Override
+    public void onAdd(String text) {
+        ideaByTagAdapter.add(new Idea(text));
+    }
+
 }
