@@ -65,7 +65,7 @@ public class TotalIdeasChart extends LineChart {
         List<Entry> ideaCounts = new ArrayList<>(numberOfDaysToShow);
         DateTimeFormatter dateFormatter = DateTimeFormat.forPattern("dd/M");
         DateTime currentDay = new DateTime();
-        currentDay = currentDay.minusDays(numberOfDaysToShow);
+        currentDay = currentDay.minusDays(numberOfDaysToShow - 1);
         int totalIdeas = 0;
         for(int i = 0; i < numberOfDaysToShow; i++) {
             dates.add(currentDay.toString(dateFormatter));
