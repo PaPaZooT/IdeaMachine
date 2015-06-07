@@ -26,6 +26,7 @@
     <string name="action_share">Share</string>
     <string name="tag_ideas" formatted="false">%s ideas</string>
     <string name="tag_deleted">Tag deleted!</string>
+    <string name="camera_not_supported">Camera not supported on your device</string>
 
     <array name="default_tags">
         <item>Fun</item>

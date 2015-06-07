@@ -3,7 +3,10 @@ package hr.matvidako.ideamachine.idea;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.support.design.widget.FloatingActionButton;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -14,7 +17,7 @@ import hr.matvidako.ideamachine.base.MenuActivity;
 import hr.matvidako.ideamachine.base.UpActivity;
 import hr.matvidako.ideamachine.idea.storage.IdeaStorage;
 
-public class IdeaDetailsActivity extends UpActivity {
+public class IdeaDetailsActivity extends UpActivity implements View.OnClickListener {
 
     private static String EXTRA_IDEA_ID = "ideaId";
     private Idea idea;
@@ -22,6 +25,8 @@ public class IdeaDetailsActivity extends UpActivity {
 
     @InjectView(R.id.idea_content)
     EditText etIdeaContent;
+    @InjectView(R.id.fab)
+    FloatingActionButton fabCamera;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -30,6 +35,7 @@ public class IdeaDetailsActivity extends UpActivity {
         ideaStorage = getApp().getIdeaStorage();
         loadDataFromIntent(getIntent());
         etIdeaContent.setText(idea.getContent());
+        fabCamera.setOnClickListener(this);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
@@ -93,6 +99,24 @@ public class IdeaDetailsActivity extends UpActivity {
         Intent i = new Intent(context, IdeaDetailsActivity.class);
         i.putExtra(EXTRA_IDEA_ID, ideaId);
         return i;
+    }
+
+    @Override
+    public void onClick(View v) {
+        int id = v.getId();
+        if(id == R.id.fab) {
+            dispatchTakePictureIntent();
+        }
+    }
+
+    private void dispatchTakePictureIntent() {
+        int REQUEST_IMAGE_CAPTURE = 1;
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+        } else {
+            Toast.makeText(this, R.string.camera_not_supported, Toast.LENGTH_SHORT).show();
+        }
     }
 
 }
