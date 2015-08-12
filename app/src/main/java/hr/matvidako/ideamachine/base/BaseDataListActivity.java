@@ -12,6 +12,7 @@ import butterknife.InjectView;
 import butterknife.Optional;
 import hr.matvidako.ideamachine.R;
 import hr.matvidako.ideamachine.db.Data;
+import hr.matvidako.ideamachine.view.DividerItemDecoration;
 
 public abstract class BaseDataListActivity<T extends Data> extends MenuActivity implements BaseDataAdapter.OnItemClickListener, View.OnClickListener {
 
@@ -55,6 +56,7 @@ public abstract class BaseDataListActivity<T extends Data> extends MenuActivity 
         //emptyIdeaList.setText(getEmptyViewStringResId());
         //listView.setEmptyView(emptyIdeaList);
         listView.setLayoutManager(new LinearLayoutManager(this));
+        listView.addItemDecoration(new DividerItemDecoration(this));
         listView.setAdapter(getAdapter());
         getAdapter().setOnItemClickListener(this);
         listView.setItemAnimator(new DefaultItemAnimator());
