@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="none">
+        <item
+            android:id="@+id/action_ideas"
+            android:checked="true"
+            android:title="@string/ideas" />
+        <item
+            android:id="@+id/action_tags"
+            android:title="@string/tags" />
+        <item
+            android:id="@+id/action_stats"
+            android:title="@string/stats" />
+        <item
+            android:id="@+id/action_help_feedback"
+            android:title="@string/help_feedback" />
+        <item
+            android:id="@+id/action_settings"
+            android:title="@string/settings" />
+    </group>
+</menu>
