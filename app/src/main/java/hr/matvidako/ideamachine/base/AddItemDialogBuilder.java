@@ -15,11 +15,16 @@ import hr.matvidako.ideamachine.R;
 
 public class AddItemDialogBuilder {
 
-    public static MaterialDialog build(final Context context, int hintStringResId, OnAddListener onAddListener) {
+    public static MaterialDialog build(final Context context, int hintStringResId, String startingText, OnAddListener onAddListener) {
         View dialogContentView = LayoutInflater.from(context).inflate(R.layout.dialog_new_item, null, false);
         final EditText etNewItem = (EditText) dialogContentView.findViewById(R.id.new_item);
+        etNewItem.setText(startingText);
         etNewItem.setHint(hintStringResId);
         return build(context, etNewItem, dialogContentView, onAddListener);
+    }
+
+    public static MaterialDialog build(final Context context, int hintStringResId, OnAddListener onAddListener) {
+        return build(context, hintStringResId, "", onAddListener);
     }
 
     public static MaterialDialog build(final Context context, final EditText etInput, View dialogContentView, final OnAddListener onAddListener) {

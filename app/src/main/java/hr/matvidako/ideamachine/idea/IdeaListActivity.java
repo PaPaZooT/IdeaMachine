@@ -1,5 +1,6 @@
 package hr.matvidako.ideamachine.idea;
 
+import android.content.Intent;
 import android.os.Bundle;
 import hr.matvidako.ideamachine.R;
 import hr.matvidako.ideamachine.base.AddItemDialogBuilder;
@@ -14,6 +15,15 @@ public class IdeaListActivity extends BaseDataListActivity<Idea> implements AddI
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().setTitle(getString(R.string.ideas));
+        handleIntent(getIntent());
+    }
+
+    private void handleIntent(Intent intent) {
+        String action = intent.getAction();
+        if (Intent.ACTION_SEND.equals(action)) {
+            String sharedText = intent.getStringExtra(Intent.EXTRA_TEXT);
+            showAddNewIdeaDialog(sharedText);
+        }
     }
 
     @Override
@@ -31,7 +41,7 @@ public class IdeaListActivity extends BaseDataListActivity<Idea> implements AddI
 
     @Override
     protected void onFabClick() {
-        showAddNewIdeaDialog();
+        showAddNewIdeaDialog("");
     }
 
     @Override
@@ -49,8 +59,8 @@ public class IdeaListActivity extends BaseDataListActivity<Idea> implements AddI
         startActivity(IdeaDetailsActivity.buildIntent(this, getAdapter().getItem(position).getId()));
     }
 
-    private void showAddNewIdeaDialog() {
-        AddItemDialogBuilder.build(this, R.string.hint_new_idea, this).show();
+    private void showAddNewIdeaDialog(String startingText) {
+        AddItemDialogBuilder.build(this, R.string.hint_new_idea, startingText, this).show();
     }
 
     @Override
