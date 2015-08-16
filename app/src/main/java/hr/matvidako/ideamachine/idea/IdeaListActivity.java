@@ -67,6 +67,7 @@ public class IdeaListActivity extends BaseDataListActivity<Idea> implements AddI
     public void onAdd(String text) {
         listView.scrollToPosition(0);
         ideaAdapter.add(new Idea(text));
+        updateEmptyViewVisibility();
     }
 
 }

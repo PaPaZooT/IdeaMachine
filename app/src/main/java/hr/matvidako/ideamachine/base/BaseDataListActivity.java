@@ -17,7 +17,7 @@ import hr.matvidako.ideamachine.view.DividerItemDecoration;
 public abstract class BaseDataListActivity<T extends Data> extends MenuActivity implements BaseDataAdapter.OnItemClickListener, View.OnClickListener {
 
     @InjectView(R.id.empty_list)
-    protected TextView emptyIdeaList;
+    protected TextView emptyListView;
     @Optional @InjectView(R.id.fab)
     FloatingActionButton floatingActionButton;
 
@@ -37,6 +37,7 @@ public abstract class BaseDataListActivity<T extends Data> extends MenuActivity 
         super.onResume();
         setupListView();
         refreshAdapter();
+        updateEmptyViewVisibility();
     }
 
     @Override
@@ -53,8 +54,7 @@ public abstract class BaseDataListActivity<T extends Data> extends MenuActivity 
     }
 
     private void setupListView() {
-        //emptyIdeaList.setText(getEmptyViewStringResId());
-        //listView.setEmptyView(emptyIdeaList);
+        emptyListView.setText(getEmptyViewStringResId());
         listView.setLayoutManager(new LinearLayoutManager(this));
         listView.addItemDecoration(new DividerItemDecoration(this));
         listView.setAdapter(getAdapter());
@@ -64,6 +64,14 @@ public abstract class BaseDataListActivity<T extends Data> extends MenuActivity 
 
     private void refreshAdapter() {
         getAdapter().refresh();
+    }
+
+    protected void updateEmptyViewVisibility() {
+        if(getAdapter().items.isEmpty()) {
+            emptyListView.setVisibility(View.VISIBLE);
+        } else {
+            emptyListView.setVisibility(View.GONE);
+        }
     }
 
     private void setupFab() {

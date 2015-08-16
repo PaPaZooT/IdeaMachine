@@ -2,7 +2,6 @@ package hr.matvidako.ideamachine.tag;
 
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import hr.matvidako.ideamachine.R;
 import hr.matvidako.ideamachine.base.AddItemDialogBuilder;
@@ -59,5 +58,6 @@ public class TagListActivity extends BaseDataListActivity<Tag> implements AddIte
     public void onAdd(String text) {
         listView.scrollToPosition(0);
         tagAdapter.add(new Tag(text));
+        updateEmptyViewVisibility();
     }
 }
