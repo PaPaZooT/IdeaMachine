@@ -19,6 +19,10 @@ import hr.matvidako.ideamachine.idea.storage.IdeaStorage;
 
 public class IdeaDetailsActivity extends UpActivity implements View.OnClickListener {
 
+
+    private int REQUEST_IMAGE_CAPTURE = 1;
+    private int REQUEST_IMAGE_SELECT = 2;
+
     private static String EXTRA_IDEA_ID = "ideaId";
     private Idea idea;
     private IdeaStorage ideaStorage;
@@ -63,10 +67,10 @@ public class IdeaDetailsActivity extends UpActivity implements View.OnClickListe
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if(id == R.id.action_delete) {
+        if (id == R.id.action_delete) {
             onDeleteIdea();
             return true;
-        } else if(id == R.id.action_share) {
+        } else if (id == R.id.action_share) {
             onShareIdea();
             return true;
         }
@@ -88,7 +92,7 @@ public class IdeaDetailsActivity extends UpActivity implements View.OnClickListe
     }
 
     private void loadDataFromIntent(Intent intent) {
-        if(intent == null) {
+        if (intent == null) {
             return;
         }
         int ideaId = intent.getIntExtra(EXTRA_IDEA_ID, 0);
@@ -104,19 +108,26 @@ public class IdeaDetailsActivity extends UpActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        if(id == R.id.fab) {
-            dispatchTakePictureIntent();
+        if (id == R.id.fab) {
+            //dispatchTakePictureIntent();
+            dispatchSelectImageIntent();
         }
     }
 
     private void dispatchTakePictureIntent() {
-        int REQUEST_IMAGE_CAPTURE = 1;
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
             startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
         } else {
             Toast.makeText(this, R.string.camera_not_supported, Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void dispatchSelectImageIntent() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), REQUEST_IMAGE_SELECT);
     }
 
 }
