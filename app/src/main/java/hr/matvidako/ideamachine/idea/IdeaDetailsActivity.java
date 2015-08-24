@@ -1,14 +1,22 @@
 package hr.matvidako.ideamachine.idea;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -31,6 +39,8 @@ public class IdeaDetailsActivity extends UpActivity implements View.OnClickListe
     EditText etIdeaContent;
     @InjectView(R.id.fab)
     FloatingActionButton fabCamera;
+    @InjectView(R.id.test_image)
+    ImageView testImage;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -128,6 +138,23 @@ public class IdeaDetailsActivity extends UpActivity implements View.OnClickListe
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), REQUEST_IMAGE_SELECT);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_IMAGE_SELECT && resultCode == Activity.RESULT_OK)
+            try {
+                InputStream stream = getContentResolver().openInputStream(
+                        data.getData());
+                Bitmap bitmap = BitmapFactory.decodeStream(stream);
+                stream.close();
+                testImage.setImageBitmap(bitmap);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
 }
