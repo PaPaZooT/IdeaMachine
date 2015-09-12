@@ -12,7 +12,7 @@
         android:label="@string/app_name"
         android:theme="@style/IdeaTheme">
         <activity
-            android:name=".idea.IdeaListActivity"
+            android:name=".main.MainActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,6 +37,7 @@
         <activity
             android:name=".ideatag.IdeasByTagListActivity"
             android:label="" />
+        <activity android:name=".idea.IdeaListActivity"/>
     </application>
 
 </manifest>
