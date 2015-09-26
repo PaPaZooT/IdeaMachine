@@ -12,6 +12,7 @@ import butterknife.InjectView;
 import hr.matvidako.ideamachine.R;
 import hr.matvidako.ideamachine.idea.IdeaListFragment;
 import hr.matvidako.ideamachine.stats.StatsFragment;
+import hr.matvidako.ideamachine.tag.TagListFragment;
 
 public class MainActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener {
 
@@ -37,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     public void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFrag(new IdeaListFragment(), getString(R.string.ideas));
-        adapter.addFrag(new DummyFragment(), getString(R.string.tags));
+        adapter.addFrag(new TagListFragment(), getString(R.string.tags));
         adapter.addFrag(new StatsFragment(), getString(R.string.stats));
         viewPager.setAdapter(adapter);
         viewPager.addOnPageChangeListener(this);

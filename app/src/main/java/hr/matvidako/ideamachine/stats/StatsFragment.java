@@ -1,8 +1,6 @@
 package hr.matvidako.ideamachine.stats;
 
 import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +10,6 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import hr.matvidako.ideamachine.IdeaApplication;
 import hr.matvidako.ideamachine.R;
-import hr.matvidako.ideamachine.base.MenuActivity;
 import hr.matvidako.ideamachine.idea.storage.IdeaStorage;
 import hr.matvidako.ideamachine.stats.chart.IdeasPerDayChart;
 import hr.matvidako.ideamachine.stats.chart.TotalIdeasChart;

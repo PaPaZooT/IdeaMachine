@@ -21,7 +21,6 @@ import java.io.InputStream;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import hr.matvidako.ideamachine.R;
-import hr.matvidako.ideamachine.base.MenuActivity;
 import hr.matvidako.ideamachine.base.UpActivity;
 import hr.matvidako.ideamachine.idea.storage.IdeaStorage;
 

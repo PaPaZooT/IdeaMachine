@@ -25,16 +25,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".tag.TagListActivity"
-            android:label="@string/tags" />
-        <activity
             android:name=".idea.IdeaDetailsActivity"
             android:label="">
         </activity>
-        <activity
-            android:name=".ideatag.IdeasByTagListActivity"
-            android:label="" />
-        <activity android:name=".idea.IdeaListActivity"/>
     </application>
 
 </manifest>

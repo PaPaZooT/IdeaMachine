@@ -14,7 +14,7 @@ import hr.matvidako.ideamachine.R;
 import hr.matvidako.ideamachine.db.Data;
 import hr.matvidako.ideamachine.view.DividerItemDecoration;
 
-public abstract class BaseDataListActivity<T extends Data> extends MenuActivity implements BaseDataAdapter.OnItemClickListener, View.OnClickListener {
+public abstract class BaseDataListActivity<T extends Data> extends BaseActivity implements BaseDataAdapter.OnItemClickListener, View.OnClickListener {
 
     @InjectView(R.id.empty_list)
     protected TextView emptyListView;
