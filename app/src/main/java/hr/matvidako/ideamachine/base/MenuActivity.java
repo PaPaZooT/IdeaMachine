@@ -11,7 +11,6 @@ import android.widget.TextView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import hr.matvidako.ideamachine.R;
-import hr.matvidako.ideamachine.idea.IdeaListActivity;
 import hr.matvidako.ideamachine.idea.storage.IdeaStorage;
 import hr.matvidako.ideamachine.tag.TagListActivity;
 
@@ -58,10 +57,7 @@ public abstract class MenuActivity extends BaseActivity implements NavigationVie
         int id = menuItem.getItemId();
 
         drawerLayout.closeDrawers();
-        if(id == R.id.action_ideas) {
-            startActivity(IdeaListActivity.class);
-            return true;
-        } else if(id == R.id.action_tags) {
+        if(id == R.id.action_tags) {
             startActivity(TagListActivity.class);
             return true;
         }

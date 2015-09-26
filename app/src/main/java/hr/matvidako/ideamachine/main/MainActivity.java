@@ -1,6 +1,7 @@
 package hr.matvidako.ideamachine.main;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -9,9 +10,10 @@ import android.support.v7.widget.Toolbar;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import hr.matvidako.ideamachine.R;
+import hr.matvidako.ideamachine.idea.IdeaListFragment;
 import hr.matvidako.ideamachine.stats.StatsFragment;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener {
 
     @InjectView(R.id.toolbar)
     Toolbar toolbar;
@@ -19,6 +21,8 @@ public class MainActivity extends AppCompatActivity {
     ViewPager viewPager;
     @InjectView(R.id.tab_layout)
     TabLayout tabLayout;
+    @InjectView(R.id.fab)
+    FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,10 +36,27 @@ public class MainActivity extends AppCompatActivity {
 
     public void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFrag(new DummyFragment(), getString(R.string.ideas));
+        adapter.addFrag(new IdeaListFragment(), getString(R.string.ideas));
         adapter.addFrag(new DummyFragment(), getString(R.string.tags));
         adapter.addFrag(new StatsFragment(), getString(R.string.stats));
         viewPager.setAdapter(adapter);
+        viewPager.addOnPageChangeListener(this);
     }
 
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+        if(position == 1) {
+            fab.show();
+        } else {
+            fab.hide();
+        }
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+    }
 }
