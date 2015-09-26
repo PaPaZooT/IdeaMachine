@@ -13,7 +13,6 @@ import butterknife.InjectView;
 import hr.matvidako.ideamachine.R;
 import hr.matvidako.ideamachine.idea.IdeaListActivity;
 import hr.matvidako.ideamachine.idea.storage.IdeaStorage;
-import hr.matvidako.ideamachine.stats.StatsActivity;
 import hr.matvidako.ideamachine.tag.TagListActivity;
 
 public abstract class MenuActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -64,9 +63,6 @@ public abstract class MenuActivity extends BaseActivity implements NavigationVie
             return true;
         } else if(id == R.id.action_tags) {
             startActivity(TagListActivity.class);
-            return true;
-        } else if(id == R.id.action_stats) {
-            startActivity(StatsActivity.class);
             return true;
         }
         return super.onOptionsItemSelected(menuItem);

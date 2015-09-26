@@ -28,9 +28,6 @@
             android:name=".tag.TagListActivity"
             android:label="@string/tags" />
         <activity
-            android:name=".stats.StatsActivity"
-            android:label="@string/stats" />
-        <activity
             android:name=".idea.IdeaDetailsActivity"
             android:label="">
         </activity>

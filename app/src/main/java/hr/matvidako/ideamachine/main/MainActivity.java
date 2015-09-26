@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import hr.matvidako.ideamachine.R;
+import hr.matvidako.ideamachine.stats.StatsFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFrag(new DummyFragment(), getString(R.string.ideas));
         adapter.addFrag(new DummyFragment(), getString(R.string.tags));
-        adapter.addFrag(new DummyFragment(), getString(R.string.stats));
+        adapter.addFrag(new StatsFragment(), getString(R.string.stats));
         viewPager.setAdapter(adapter);
     }
 
