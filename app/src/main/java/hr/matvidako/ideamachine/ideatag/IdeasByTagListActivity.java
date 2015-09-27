@@ -125,6 +125,7 @@ public class IdeasByTagListActivity extends BaseDataListActivity<Idea> implement
     public void onAdd(String text) {
         listView.scrollToPosition(0);
         ideaByTagAdapter.add(new Idea(text));
+        updateEmptyViewVisibility();
     }
 
 }
