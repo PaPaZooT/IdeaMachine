@@ -26,8 +26,10 @@
         </activity>
         <activity
             android:name=".idea.IdeaDetailsActivity"
-            android:label="">
-        </activity>
+            android:label=""></activity>
+        <activity
+            android:name=".ideatag.IdeasByTagListActivity"
+            android:label="" />
     </application>
 
 </manifest>

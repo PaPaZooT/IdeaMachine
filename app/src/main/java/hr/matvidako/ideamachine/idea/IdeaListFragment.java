@@ -11,7 +11,6 @@ import hr.matvidako.ideamachine.IdeaApplication;
 import hr.matvidako.ideamachine.R;
 import hr.matvidako.ideamachine.base.AddItemDialogBuilder;
 import hr.matvidako.ideamachine.base.BaseDataAdapter;
-import hr.matvidako.ideamachine.base.BaseDataListActivity;
 import hr.matvidako.ideamachine.base.BaseDataListFragment;
 
 public class IdeaListFragment extends BaseDataListFragment<Idea> implements AddItemDialogBuilder.OnAddListener {
@@ -20,7 +19,7 @@ public class IdeaListFragment extends BaseDataListFragment<Idea> implements AddI
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_idea_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_list, container, false);
         ButterKnife.inject(this, view);
         return view;
     }

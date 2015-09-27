@@ -22,7 +22,7 @@ public class TagListFragment extends BaseDataListFragment<Tag> implements AddIte
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_tag_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_list, container, false);
         ButterKnife.inject(this, view);
         return view;
     }

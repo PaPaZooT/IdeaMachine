@@ -78,7 +78,7 @@ public class IdeasByTagListActivity extends BaseDataListActivity<Idea> implement
 
     @Override
     protected int getLayoutResId() {
-        return R.layout.activity_idea_list;
+        return R.layout.activity_list;
     }
 
     @Override
