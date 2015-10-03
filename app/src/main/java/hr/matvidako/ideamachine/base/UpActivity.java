@@ -1,7 +1,6 @@
 package hr.matvidako.ideamachine.base;
 
 import android.os.Bundle;
-import android.support.v4.widget.DrawerLayout;
 import android.view.MenuItem;
 
 public abstract class UpActivity extends BaseActivity {
@@ -10,7 +9,6 @@ public abstract class UpActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
     }
 
     @Override
