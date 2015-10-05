@@ -56,7 +56,7 @@ public abstract class BaseDataListActivity<T extends Data> extends BaseActivity 
     private void setupListView() {
         emptyListView.setText(getEmptyViewStringResId());
         listView.setLayoutManager(new LinearLayoutManager(this));
-        listView.addItemDecoration(new DividerItemDecoration(this));
+        listView.addItemDecoration(new DividerItemDecoration(this, R.drawable.abc_list_divider_mtrl_alpha));
         listView.setAdapter(getAdapter());
         getAdapter().setOnItemClickListener(this);
         listView.setItemAnimator(new DefaultItemAnimator());

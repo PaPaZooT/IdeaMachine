@@ -43,7 +43,7 @@ public abstract class BaseDataListFragment<T extends Data> extends Fragment impl
         Context context = getActivity();
         emptyListView.setText(getEmptyViewStringResId());
         listView.setLayoutManager(new LinearLayoutManager(context));
-        listView.addItemDecoration(new DividerItemDecoration(context));
+        listView.addItemDecoration(new DividerItemDecoration(context, R.drawable.abc_list_divider_mtrl_alpha));
         listView.setAdapter(getAdapter());
         getAdapter().setOnItemClickListener(this);
         listView.setItemAnimator(new DefaultItemAnimator());
