@@ -22,8 +22,6 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     ViewPager viewPager;
     @InjectView(R.id.tab_layout)
     TabLayout tabLayout;
-    @InjectView(R.id.fab)
-    FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,11 +48,6 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
 
     @Override
     public void onPageSelected(int position) {
-        if(position == 1) {
-            fab.show();
-        } else {
-            fab.hide();
-        }
     }
 
     @Override
