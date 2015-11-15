@@ -18,10 +18,8 @@ import hr.matvidako.ideamachine.view.DividerItemDecoration;
 
 public abstract class BaseDataListFragment<T extends Data> extends Fragment implements BaseDataAdapter.OnItemClickListener, View.OnClickListener {
 
-    @InjectView(R.id.empty_list)
-    protected TextView emptyListView;
-    @InjectView(R.id.list)
-    protected RecyclerView listView;
+    @InjectView(R.id.empty_list) protected TextView emptyListView;
+    @InjectView(R.id.list) protected RecyclerView listView;
 
     @Override
     public void onResume() {

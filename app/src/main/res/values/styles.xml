@@ -38,4 +38,13 @@
         <item name="android:layout_margin">@dimen/padding_normal</item>
     </style>
 
+    <style name="button_borderless">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/accent</item>
+        <item name="android:padding">@dimen/padding_small</item>
+        <item name="android:background">@drawable/bg_borderless_button</item>
+    </style>
+
 </resources>

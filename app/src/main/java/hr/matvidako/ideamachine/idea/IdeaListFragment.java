@@ -5,8 +5,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import butterknife.ButterKnife;
+import butterknife.InjectView;
+import butterknife.OnClick;
 import hr.matvidako.ideamachine.IdeaApplication;
 import hr.matvidako.ideamachine.R;
 import hr.matvidako.ideamachine.base.AddItemDialogBuilder;
@@ -16,6 +20,7 @@ import hr.matvidako.ideamachine.base.BaseDataListFragment;
 public class IdeaListFragment extends BaseDataListFragment<Idea> implements AddItemDialogBuilder.OnAddListener {
 
     private IdeaAdapter ideaAdapter;
+    @InjectView(R.id.idea_content) EditText ideaEt;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -44,6 +49,16 @@ public class IdeaListFragment extends BaseDataListFragment<Idea> implements AddI
     @Override
     protected void onFabClick() {
         showAddNewIdeaDialog("");
+    }
+
+    @OnClick(R.id.add)
+    void addIdea() {
+        String ideaText = ideaEt.getText().toString();
+        if(ideaText.isEmpty()) {
+            return;
+        }
+        onAdd(ideaText);
+        ideaEt.setText("");
     }
 
     @Override

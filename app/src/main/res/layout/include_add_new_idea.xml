@@ -5,6 +5,7 @@
     android:orientation="horizontal"
     android:gravity="center_vertical"
     android:background="@color/background_light"
+    android:clipToPadding="false"
     android:paddingLeft="@dimen/padding_normal"
     android:paddingRight="@dimen/padding_normal"
     android:paddingTop="@dimen/padding_small"
@@ -18,6 +19,7 @@
         android:focusableInTouchMode="true" />
 
     <EditText
+        android:id="@+id/idea_content"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -25,9 +27,8 @@
         android:hint="@string/hint_new_idea"
         android:inputType="textCapSentences" />
 
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/add_grey"
-        android:background="@color/transparent"/>
+    <TextView
+        android:id="@+id/add"
+        android:text="@string/add"
+        style="@style/button_borderless" />
 </LinearLayout>
