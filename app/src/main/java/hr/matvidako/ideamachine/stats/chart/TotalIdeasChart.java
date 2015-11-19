@@ -41,6 +41,7 @@ public class TotalIdeasChart extends LineChart {
     }
 
     private void style() {
+        setDrawGridBackground(false);
         setDrawBorders(false);
         getLegend().setEnabled(false);
         setDescription("");

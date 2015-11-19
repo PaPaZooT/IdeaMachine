@@ -41,6 +41,7 @@ public class IdeasPerDayChart extends BarChart {
     }
 
     private void style() {
+        setDrawGridBackground(false);
         setDrawBorders(false);
         getLegend().setEnabled(false);
         setDescription("");
