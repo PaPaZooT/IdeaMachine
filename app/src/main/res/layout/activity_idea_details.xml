@@ -29,6 +29,4 @@
         android:scaleType="centerCrop"
         android:layout_alignParentBottom="true"/>
 
-    <include layout="@layout/fab_camera"/>
-
 </RelativeLayout>

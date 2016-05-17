@@ -1,22 +1,11 @@
 package hr.matvidako.ideamachine.idea;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.support.design.widget.FloatingActionButton;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
-
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -24,22 +13,13 @@ import hr.matvidako.ideamachine.R;
 import hr.matvidako.ideamachine.base.UpActivity;
 import hr.matvidako.ideamachine.idea.storage.IdeaStorage;
 
-public class IdeaDetailsActivity extends UpActivity implements View.OnClickListener {
-
-
-    private int REQUEST_IMAGE_CAPTURE = 1;
-    private int REQUEST_IMAGE_SELECT = 2;
+public class IdeaDetailsActivity extends UpActivity {
 
     private static String EXTRA_IDEA_ID = "ideaId";
     private Idea idea;
     private IdeaStorage ideaStorage;
 
-    @InjectView(R.id.idea_content)
-    EditText etIdeaContent;
-    @InjectView(R.id.fab)
-    FloatingActionButton fabCamera;
-    @InjectView(R.id.test_image)
-    ImageView testImage;
+    @InjectView(R.id.idea_content) EditText etIdeaContent;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -48,7 +28,6 @@ public class IdeaDetailsActivity extends UpActivity implements View.OnClickListe
         ideaStorage = getApp().getIdeaStorage();
         loadDataFromIntent(getIntent());
         etIdeaContent.setText(idea.getContent());
-        fabCamera.setOnClickListener(this);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
@@ -112,48 +91,6 @@ public class IdeaDetailsActivity extends UpActivity implements View.OnClickListe
         Intent i = new Intent(context, IdeaDetailsActivity.class);
         i.putExtra(EXTRA_IDEA_ID, ideaId);
         return i;
-    }
-
-    @Override
-    public void onClick(View v) {
-        int id = v.getId();
-        if (id == R.id.fab) {
-            //dispatchTakePictureIntent();
-            dispatchSelectImageIntent();
-        }
-    }
-
-    private void dispatchTakePictureIntent() {
-        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-        } else {
-            Toast.makeText(this, R.string.camera_not_supported, Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    private void dispatchSelectImageIntent() {
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "Select Picture"), REQUEST_IMAGE_SELECT);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_IMAGE_SELECT && resultCode == Activity.RESULT_OK)
-            try {
-                InputStream stream = getContentResolver().openInputStream(
-                        data.getData());
-                Bitmap bitmap = BitmapFactory.decodeStream(stream);
-                stream.close();
-                testImage.setImageBitmap(bitmap);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        super.onActivityResult(requestCode, resultCode, data);
     }
 
 }
