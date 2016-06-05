@@ -105,8 +105,8 @@ public class IdeasByTagListActivity extends BaseDataListActivity<Idea> implement
     }
 
     @Override
-    protected int getEmptyViewStringResId() {
-        return R.string.no_ideas_for_tag;
+    protected String getEmptyViewString() {
+        return getString(R.string.no_ideas_for_tag, tag.getTitle());
     }
 
     @Override

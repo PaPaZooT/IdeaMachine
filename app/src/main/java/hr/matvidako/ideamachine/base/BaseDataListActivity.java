@@ -16,13 +16,9 @@ import hr.matvidako.ideamachine.view.DividerItemDecoration;
 
 public abstract class BaseDataListActivity<T extends Data> extends BaseActivity implements BaseDataAdapter.OnItemClickListener, View.OnClickListener {
 
-    @InjectView(R.id.empty_list)
-    protected TextView emptyListView;
-    @Optional @InjectView(R.id.fab)
-    FloatingActionButton floatingActionButton;
-
-    @InjectView(R.id.list)
-    protected RecyclerView listView;
+    @InjectView(R.id.empty_list) protected TextView emptyListView;
+    @Optional @InjectView(R.id.fab) FloatingActionButton floatingActionButton;
+    @InjectView(R.id.list) protected RecyclerView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +50,7 @@ public abstract class BaseDataListActivity<T extends Data> extends BaseActivity 
     }
 
     private void setupListView() {
-        emptyListView.setText(getEmptyViewStringResId());
+        emptyListView.setText(getEmptyViewString());
         listView.setLayoutManager(new LinearLayoutManager(this));
         listView.addItemDecoration(new DividerItemDecoration(this, R.drawable.abc_list_divider_mtrl_alpha));
         listView.setAdapter(getAdapter());
@@ -84,6 +80,6 @@ public abstract class BaseDataListActivity<T extends Data> extends BaseActivity 
 
     protected abstract void onFabClick();
 
-    protected abstract int getEmptyViewStringResId();
+    protected abstract String getEmptyViewString();
 
 }
