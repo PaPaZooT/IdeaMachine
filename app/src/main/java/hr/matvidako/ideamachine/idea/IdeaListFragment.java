@@ -2,9 +2,11 @@ package hr.matvidako.ideamachine.idea;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -26,7 +28,21 @@ public class IdeaListFragment extends BaseDataListFragment<Idea> implements AddI
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_idea_list, container, false);
         ButterKnife.inject(this, view);
+        setAddIdeaEditorActionListener();
         return view;
+    }
+
+    private void setAddIdeaEditorActionListener() {
+        ideaEt.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    addIdea();
+                    return true;
+                }
+                return false;
+            }
+        });
     }
 
     //TODO
@@ -40,7 +56,7 @@ public class IdeaListFragment extends BaseDataListFragment<Idea> implements AddI
 
     @Override
     protected BaseDataAdapter<Idea> getAdapter() {
-        if(ideaAdapter == null) {
+        if (ideaAdapter == null) {
             ideaAdapter = new IdeaAdapter(getActivity(), IdeaApplication.getInstance().getIdeaStorage());
         }
         return ideaAdapter;
@@ -48,13 +64,12 @@ public class IdeaListFragment extends BaseDataListFragment<Idea> implements AddI
 
     @Override
     protected void onFabClick() {
-        showAddNewIdeaDialog("");
     }
 
     @OnClick(R.id.add)
     void addIdea() {
         String ideaText = ideaEt.getText().toString();
-        if(ideaText.isEmpty()) {
+        if (ideaText.isEmpty()) {
             return;
         }
         onAdd(ideaText);

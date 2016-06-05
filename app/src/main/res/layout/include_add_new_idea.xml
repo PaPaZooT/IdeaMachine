@@ -25,6 +25,7 @@
         android:layout_weight="1"
         android:background="@color/transparent"
         android:hint="@string/hint_new_idea"
+        android:imeOptions="actionDone"
         android:inputType="textCapSentences" />
 
     <TextView
